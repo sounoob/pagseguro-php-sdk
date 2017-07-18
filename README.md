@@ -1,5 +1,5 @@
 # pagseguro-php-sdk
-Uma biblioteca do PagSeguro que qualquer noob pode usar, editar, contribuir, melhor e seja lá o que eles quiserem fazer... 
+Uma biblioteca do PagSeguro que qualquer noob pode usar, editar, contribuir, melhorar e seja lá o que eles quiserem fazer... 
 
 A ideia dessa disso é ter um lugar onde terá o suporte a todas APIs disponíveis do PagSeguro, de uma forma onde deverá ser mais atualizada que a versão oficial.
 
