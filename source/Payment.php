@@ -162,23 +162,3 @@ class Payment extends Utils
         $this->shippingAddressCountry = $shippingAddressCountry;
     }
 }
-
-$payment = new Payment();
-
-$iten[] = array(
-    'id' =>'0001',
-    'amount' => 'Notebook prata',
-    'description' => 2,
-    'quantity' => 130.00
-);
-
-$iten[] = array(
-    '0002',
-    'Notebook preto',
-    2,
-    430.00
-);
-$payment->setShippingAddressState('SP');
-$payment->additens($iten);
-$payment->addItem();
-$payment->show();
