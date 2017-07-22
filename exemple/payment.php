@@ -20,3 +20,7 @@ $payment->setShippingAddressState('SP');
 $payment->additens($iten);
 
 $payment->setShippingType(1);
+
+$data = $payment->redirectCode();
+
+echo $data;

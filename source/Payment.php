@@ -1,6 +1,7 @@
 <?php
 
 include_once "Utils.php";
+include_once "Curl.php";
 
 class Payment extends Utils
 {
@@ -30,6 +31,7 @@ class Payment extends Utils
 
     public function __construct()
     {
+        $this->endpoint .=  '?email=' . $this->email . '&token=' . $this->token;
     }
 
     public function additens($itens)
@@ -160,5 +162,66 @@ class Payment extends Utils
     public function setShippingAddressCountry($shippingAddressCountry)
     {
         $this->shippingAddressCountry = $shippingAddressCountry;
+    }
+
+    private function build()
+    {
+        $data = array();
+        //required
+        $data['currency'] = $this->currency;
+        $data['senderEmail'] = $this->senderEmail;
+
+
+        $data['reference'] = $this->reference;
+
+        $data['senderName'] = $this->senderName;
+        $data['senderAreaCode'] = $this->senderAreaCode;
+        $data['senderPhone'] = $this->senderPhone;
+        $data['shippingType'] = $this->shippingType;
+
+        $data['shippingAddressStreet'] = $this->shippingAddressStreet;
+        $data['shippingAddressNumber'] = $this->shippingAddressNumber;
+        $data['shippingAddressComplement'] = $this->shippingAddressComplement;
+        $data['shippingAddressDistrict'] = $this->shippingAddressDistrict;
+        $data['shippingAddressPostalCode'] = $this->shippingAddressPostalCode;
+        $data['shippingAddressCity'] = $this->shippingAddressCity;
+        $data['shippingAddressState'] = $this->shippingAddressState;
+        $data['shippingAddressCountry'] = $this->shippingAddressCountry;
+
+        $data['redirectURL'] = $this->redirectURL;
+
+        $i = 1;
+        foreach ($this->item as $item) {
+            $data['itemId' . $i] = $item->id;
+            $data['itemDescription' . $i] = $item->description;
+            $data['itemAmount' . $i] = $item->amount;
+            $data['itemQuantity' . $i] = $item->quantity;
+            if($item->weight) {
+                $data['itemWeight' . $i] = $item->weight;
+            }
+            if($item->shippingCost) {
+                $data['itemShippingCost' . $i] = $item->shippingCost;
+            }
+            $i++;
+        }
+
+        return $data;
+    }
+
+    public function send()
+    {
+        $data = $this->build();
+        $curl = new Curl($this->endpoint, $data);
+        return $data = $curl->exec();
+    }
+
+    public function checkoutCode()
+    {
+        $data = $this->send();
+        return isset($data->code) ? $data->code : false;
+    }
+    public function redirectCode()
+    {
+        return 'https://pagseguro.uol.com.br/v2/checkout/payment.html?code=' . $this->checkoutCode();
     }
 }
