@@ -1,14 +1,11 @@
 <?php
 
+include_once "Config.php";
 include_once "Utils.php";
 include_once "Curl.php";
 
 class Payment extends Utils
 {
-
-    private $endpoint = 'https://ws.pagseguro.uol.com.br/v2/checkout';
-    private $email = 'email@email.com.br';
-    private $token = '90sdf89s0df89s0df89s0dfjds';
     private $currency = 'BRL';
     private $item = array();
     private $extraAmount;
@@ -31,7 +28,7 @@ class Payment extends Utils
 
     public function __construct()
     {
-        $this->endpoint .=  '?email=' . $this->email . '&token=' . $this->token;
+
     }
 
     public function additens($itens)
@@ -210,8 +207,10 @@ class Payment extends Utils
 
     public function send()
     {
+        $url = URL::WS . 'v2/checkout?email=' . Conf::EMAIL . '&token=' . Conf::TOKEN;
         $data = $this->build();
-        $curl = new Curl($this->endpoint, $data);
+
+        $curl = new Curl($url, $data);
         return $data = $curl->exec();
     }
 
@@ -222,6 +221,6 @@ class Payment extends Utils
     }
     public function redirectCode()
     {
-        return 'https://pagseguro.uol.com.br/v2/checkout/payment.html?code=' . $this->checkoutCode();
+        return URL::PAGE . 'v2/checkout/payment.html?code=' . $this->checkoutCode();
     }
 }
