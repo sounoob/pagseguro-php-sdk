@@ -207,7 +207,7 @@ class Payment extends Utils
 
     public function send()
     {
-        $url = URL::WS . 'v2/checkout?email=' . Conf::EMAIL . '&token=' . Conf::TOKEN;
+        $url = URL::getWs() . 'v2/checkout?email=' . Conf::getEmail() . '&token=' . Conf::getToken();
         $data = $this->build();
 
         $curl = new Curl($url, $data);
@@ -221,6 +221,6 @@ class Payment extends Utils
     }
     public function redirectCode()
     {
-        return URL::PAGE . 'v2/checkout/payment.html?code=' . $this->checkoutCode();
+        return URL::getPage() . 'v2/checkout/payment.html?code=' . $this->checkoutCode();
     }
 }

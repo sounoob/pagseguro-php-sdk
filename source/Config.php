@@ -1,18 +1,94 @@
 <?php
+
+/**
+ * Class Conf
+ */
 class Conf
 {
-    const SANDBOX = false;
-    const EMAIL = 'financeiro@sounoob.com.br';
-    const TOKEN_PRODUCTION = "E735675D6AC38486A9DXA03FD79DD29C";
-    const TOKEN_SANDBOX = "58BD30C836DF4A64AD2DDCXF42XAX4B8";
+    /**
+     * @var bool
+     */
+    private static $sandbox = false;
+    /**
+     * @var string
+     */
+    private static $email = 'financeiro@sounoob.com.br';
+    /**
+     * @var string
+     */
+    private static $tokenProduction = "E735675D6AC38486A9DXA03FD79DD29C";
+    /**
+     * @var string
+     */
+    private static $tokenSandbox = "58BD30C836DF4A64AD2DDCXF42XAX4B8";
 
+    /**
+     * @return string
+     */
+    public static function getEmail()
+    {
+        return self::$email;
+    }
 
-    const TOKEN = Conf::SANDBOX ? Conf::TOKEN_SANDBOX : Conf::TOKEN_PRODUCTION;
+    /**
+     * @return string
+     */
+    public static function getToken()
+    {
+        return self::isSandbox() ? self::$tokenSandbox : self::$tokenProduction;
+    }
+
+    /**
+     * @return bool
+     */
+    public static function isSandbox()
+    {
+        return self::$sandbox;
+    }
+
+    /**
+     *
+     */
+    public static function setSandbox()
+    {
+        self::$sandbox = true;
+    }
+
+    /**
+     *
+     */
+    public static function setProduction()
+    {
+        self::$sandbox = false;
+    }
 }
 
+/**
+ * Class URL
+ */
 class URL
 {
-    const WS = Conf::SANDBOX ? 'https://ws.sandbox.pagseguro.uol.com.br/' : 'https://ws.pagseguro.uol.com.br/';
-    const PAGE = Conf::SANDBOX ? 'https://sandbox.pagseguro.uol.com.br/' : 'https://pagseguro.uol.com.br/';
-    const STC = Conf::SANDBOX ? 'https://stc.sandbox.pagseguro.uol.com.br/' : 'https://stc.pagseguro.uol.com.br/';
+    /**
+     * @return string
+     */
+    public static function getWs()
+    {
+        return Conf::isSandbox() ? 'https://ws.sandbox.pagseguro.uol.com.br/' : 'https://ws.pagseguro.uol.com.br/';
+    }
+
+    /**
+     * @return string
+     */
+    public static function getPage()
+    {
+        return Conf::isSandbox() ? 'https://sandbox.pagseguro.uol.com.br/' : 'https://pagseguro.uol.com.br/';
+    }
+
+    /**
+     * @return string
+     */
+    public static function getStc()
+    {
+        return Conf::isSandbox() ? 'https://stc.sandbox.pagseguro.uol.com.br/' : 'https://stc.pagseguro.uol.com.br/';
+    }
 }
