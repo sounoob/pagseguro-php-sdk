@@ -103,6 +103,22 @@ class Payment extends Utils
         $this->senderEmail = $senderEmail;
     }
 
+    public function setShippingTypePAC()
+    {
+        $this->setShippingType(1);
+    }
+
+    public function setShippingTypeSedex()
+    {
+        $this->setShippingType(2);
+    }
+
+    public function setShippingTypeOther()
+    {
+        $this->setShippingType(3);
+    }
+
+
     public function setShippingType($shippingType)
     {
         $array = array(
