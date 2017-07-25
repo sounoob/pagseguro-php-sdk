@@ -1,4 +1,6 @@
 # pagseguro-php-sdk
+[![Build Status](https://travis-ci.org/sounoob/pagseguro-php-sdk.svg?branch=master)](https://travis-ci.org/sounoob/pagseguro-php-sdk)
+
 Uma biblioteca do PagSeguro que qualquer noob pode usar, editar, contribuir, melhorar e seja lá o que eles quiserem fazer... 
 
 A ideia dessa disso é ter um lugar onde terá o suporte a todas APIs disponíveis do PagSeguro, de uma forma onde deverá ser mais atualizada que a versão oficial.
