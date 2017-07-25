@@ -1,0 +1,13 @@
+{
+    "name": "sounoob/pagseguro",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "SouNoob",
+            "email": "OpenSource@sounoob.com.br"
+        }
+    ],
+    "require": {
+        "phpunit/phpunit": "5.5.*"
+    }
+}
