@@ -10,4 +10,4 @@ php:
 
 install: composer install
 
-script: phpunit tests/ConfigTest.php
+script: phpunit tests/ConfigTest.php --verbose --debug

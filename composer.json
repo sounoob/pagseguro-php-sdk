@@ -8,6 +8,6 @@
         }
     ],
     "require": {
-        "phpunit/phpunit": "5.5.*"
+        "phpunit/phpunit": "4.8.*"
     }
 }

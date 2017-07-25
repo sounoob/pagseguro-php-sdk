@@ -1,6 +1,6 @@
 <?php
 
-include_once '/source/Config.php';
+include_once 'source/Config.php';
 
 class ConfigTest extends \PHPUnit\Framework\TestCase
 {
