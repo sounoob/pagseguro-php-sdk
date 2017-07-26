@@ -19,7 +19,7 @@ $iten[] = array(
 $payment->setShippingAddressState('SP');
 $payment->additens($iten);
 
-$payment->setShippingType(1);
+$payment->setShippingTypeSedex();
 
 $data = $payment->redirectCode();
 
