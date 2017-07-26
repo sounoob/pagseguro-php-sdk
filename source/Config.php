@@ -12,15 +12,15 @@ class Conf
     /**
      * @var string
      */
-    private static $email = 'financeiro@sounoob.com.br';
+    private static $email = 'testador@sounoob.com.br';
     /**
      * @var string
      */
-    private static $tokenProduction = "E735675D6AC38486A9DXA03FD79DD29C";
+    private static $tokenProduction = "DFB64A420E0E478187B649AFA3603C67";
     /**
      * @var string
      */
-    private static $tokenSandbox = "58BD30C836DF4A64AD2DDCXF42XAX4B8";
+    private static $tokenSandbox = "B4BD2EF8E723436F9189B79DD1FB544A";
 
     /**
      * @return string
