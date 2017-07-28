@@ -16,7 +16,7 @@ class Payment extends Utils
         $this->data['reference'] = 'generated automatically in: ' . date('r');
     }
 
-    public function additens($itens)
+    public function additens(array $itens)
     {
         foreach ($itens as $row) {
             $row['amount'] = isset($row['amount']) ? $row['amount'] : 0;
