@@ -16,7 +16,7 @@ class Conf
     /**
      * @var string
      */
-    private static $tokenProduction = "DFB64A420E0E478187B649AFA3603C67";
+    private static $tokenProduction = "8138C6CF07B64F6B852774D6D4B03CB7";
     /**
      * @var string
      */
