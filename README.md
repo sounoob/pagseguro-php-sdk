@@ -3,7 +3,7 @@
 
 Uma biblioteca do PagSeguro que qualquer noob pode usar, editar, contribuir, melhorar e seja lá o que eles quiserem fazer... 
 
-A ideia dessa disso é ter um lugar onde terá o suporte a todas APIs disponíveis do PagSeguro, de uma forma onde deverá ser mais atualizada que a versão oficial.
+A ideia disso é ter um lugar onde terá o suporte a todas APIs disponíveis do PagSeguro, de uma forma onde deverá ser mais atualizada que a versão oficial.
 
 Aqui seu pull request é bem-vindo, desde que mantenha a ideia inicial da API, manter ela de um jeito que qualquer noob se sinta em casa.
 
