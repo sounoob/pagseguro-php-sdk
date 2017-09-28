@@ -67,7 +67,7 @@ class Boleto extends Utils
     public function __construct()
     {
         $this->data['periodicity'] = 'monthly';
-        $this->data['reference'] = 'generated automatically in: ' . date('r');
+        $this->data['reference'] = date("YmdHis");
     }
 
     public function setCustomerAddressStreet($data)
