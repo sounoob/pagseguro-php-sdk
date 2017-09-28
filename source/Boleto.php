@@ -120,9 +120,4 @@ class Boleto extends Utils
         $curl->setAccept('application/json;charset=ISO-8859-1');
         return $data = $curl->exec();
     }
-
-    public function redirectCode()
-    {
-        return URL::getPage() . 'v2/checkout/payment.html?code=' . $this->checkoutCode();
-    }
 }
