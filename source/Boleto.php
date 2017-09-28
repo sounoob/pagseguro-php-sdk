@@ -16,6 +16,7 @@ class Boleto extends Utils
 
     public function setCustomerName($data)
     {
+        //@todo test maximum lenght
         $this->data['customer']['name'] = $data;
     }
     public function setCustomerEmail($data)
@@ -57,6 +58,7 @@ class Boleto extends Utils
 
     public function setDescription($data)
     {
+        //@todo test maximum lenght
         $this->data['description'] = $data;
     }
 

@@ -41,11 +41,11 @@ $payment->addItem(
     $item4['shippingCost']
 );
 
-//$payment->setShippingAddressState('SP');
+$payment->setShippingAddressState('SP');
 
 $payment->setShippingTypeSedex();
 
-$data = $payment->build();
+$data = $payment->redirectCode();
 print_r($data);exit;
 
 echo $data;
