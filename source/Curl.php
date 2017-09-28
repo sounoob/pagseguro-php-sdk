@@ -61,17 +61,30 @@ class Curl
         return $this->data;
     }
 
+    public function setContentType($data)
+    {
+        $this->header[] = 'Content-type:' . $data;
+    }
+
+    public function setAccept($data)
+    {
+        $this->header[] = 'Accept:' . $data;
+    }
+
     /**
      * @param array $data
      */
-    public function setData($data)
+    public function setData($data, $format = 'x-www-form-urlencoded')
     {
-        $data = http_build_query($data);
+        if($format == 'json') {
+            $data = json_encode($data);
+        }else{
+            $data = http_build_query($data);
+        }
         /*
          * @todo implement GET method
          * @todo Test as send twice
          * @todo implement XML
-         * @todo implement json
          */
         curl_setopt($this->curl, CURLOPT_POSTFIELDS, $data);
         $this->data = $data;
@@ -79,9 +92,7 @@ class Curl
 
     public function parse_header()
     {
-        foreach ($this->header as $row) {
-            curl_setopt($this->curl, CURLOPT_HTTPHEADER, $row);
-        }
+        curl_setopt($this->curl, CURLOPT_HTTPHEADER, $this->header);
     }
 
     public function exec()
@@ -94,11 +105,13 @@ class Curl
             curl_setopt($this->curl, CURLOPT_POST, true);
         }
 
+
         $data = curl_exec($this->curl);
         $error = curl_error($this->curl);
         /*
          * @todo log this var $error
          */
+
 
         if($error) {
             $return = false;
