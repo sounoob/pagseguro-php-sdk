@@ -5,10 +5,6 @@ $boleto = new Boleto();
 /*
  * Campos obrigatórios
  */
-//Data de vencimento do boleto no formato de Ano-Mês-Dia. Essa data precisa ser no futuro, e no máximo 30 dias apatir do dia atual.
-$boleto->setFirstDueDate('2017-10-10');
-//Esse é o numero de boletos a ser gerado.
-$boleto->setNumberOfPayments(12);
 //Valor de cada boleto. Caso sua conta não absorver a taxa do boleto, será acrescentado 1 real no valor do boleto.
 $boleto->setAmount('17.50');
 //Descrição do boleto
@@ -26,6 +22,10 @@ $boleto->setCustomerPhone('11','98909084');
 /*
  * Campos opcionais
  */
+//Data de vencimento do boleto no formato de Ano-Mês-Dia. Essa data precisa ser no futuro, e no máximo 30 dias apatir do dia atual.
+$boleto->setFirstDueDate(date("Y-m-d", strtotime("+3 days", time())));
+//Esse é o numero de boletos a ser gerado.
+$boleto->setNumberOfPayments(12);
 //Uma referência de quem é o boleto (note que terá multiplos boletos com a mesma referência)
 $boleto->setReference('Referencia');//**
 //Instruções para quem irá receber o pagamento

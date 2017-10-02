@@ -68,8 +68,6 @@ class Boleto extends Utils
     }
     public function __construct()
     {
-        $this->data['periodicity'] = 'monthly';
-        $this->data['reference'] = date("YmdHis");
     }
 
     public function setCustomerAddressStreet($data)
@@ -108,6 +106,19 @@ class Boleto extends Utils
 
     public function build()
     {
+        if(!isset($this->data['periodicity'])) {
+            $this->data['periodicity'] = 'monthly';
+        }
+        if(!isset($this->data['numberOfPayments'])) {
+            $this->data['numberOfPayments'] = 1;
+        }
+        if(!isset($this->data['reference'])) {
+            $this->data['reference'] = date("YmdHis");
+        }
+        if(!isset($this->data['firstDueDate'])) {
+            $this->data['firstDueDate'] = date("Y-m-d", strtotime("+3 days", time()));
+        }
+
         return $this->data;
     }
 
