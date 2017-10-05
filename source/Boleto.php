@@ -21,6 +21,10 @@ class Boleto extends Utils
     }
     public function setCustomerEmail($data)
     {
+        if (!filter_var($data, FILTER_VALIDATE_EMAIL)) {
+            //PagSeguro error code 53012
+            throw new InvalidArgumentException('sender email invalid value: ' . $data);
+        }
         $this->data['customer']['email'] = $data;
     }
 
@@ -48,11 +52,22 @@ class Boleto extends Utils
 
     public function setNumberOfPayments($data)
     {
+        $data = $this->only_numbers($data);
+
+        if($data < 1 || $data > 12) {
+            //PagSeguro error code 1021
+            throw new InvalidArgumentException('numberOfPayments is invalid. it must have only numbers (0-9) and value between 1 to 12.');
+        }
         $this->data['numberOfPayments'] = $data;
     }
 
     public function setAmount($data)
     {
+        $data = (double) $data;
+        if($data < 5 || $data > 1000000) {
+            //PagSeguro error code 1041
+            throw new InvalidArgumentException('amount is invalid. it is allowed value between 5.00 to 1000000.00.');
+        }
         $this->data['amount'] = $data;
     }
 
