@@ -14,7 +14,7 @@ $boleto->setCustomerCPF('01234567890');
 //Nome do comprador
 $boleto->setCustomerName('Noob Master');
 //Email do comprador
-$boleto->setCustomerEmail('contato@flaviosena.com.br');
+$boleto->setCustomerEmail('financeiro@sounoob.com.br');
 //Telefone do comprador
 $boleto->setCustomerPhone('11','98909084');
 
