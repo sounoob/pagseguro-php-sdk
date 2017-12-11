@@ -112,9 +112,10 @@ class Curl
          * @todo log this var $error
          */
 
-
         if($error) {
             $return = false;
+        } elseif (strlen($data) === 0 || $data == 'Unauthorized') {
+            throw new Exception('E-mail or token is invalid in this envolviment: ' . (Conf::isSandbox() ? 'Sandobx' : 'Production'));
         } elseif ($data{0} == '{') {
             $return = json_decode($data);
         } elseif (strpos($data, '<?xml') !== false) {
