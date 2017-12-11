@@ -20,7 +20,7 @@ class Conf
     /**
      * @var string
      */
-    private static $tokenSandbox = "497226512D9D415F95AAC791F72778DE";
+    private static $tokenSandbox = "CEEE2C5274A149588A3A3F4211BE9C42";
 
     /**
      * @return string
@@ -60,6 +60,19 @@ class Conf
     public static function setProduction()
     {
         self::$sandbox = false;
+    }
+
+    public static function setAccountCredentials($email, $token, $isSandbox = true)
+    {
+        self::$email = $email;
+
+        if($isSandbox === true) {
+            self::setSandbox();
+            self::$tokenSandbox = $token;
+        }else{
+            self::setProduction();
+            self::$tokenProduction = $token;
+        }
     }
 }
 

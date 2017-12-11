@@ -1,6 +1,10 @@
 <?php
 include '../source/Payment.php';
 
+//Conf::setProduction();
+//Conf::setSandbox();
+//Conf::setAccountCredentials('dev@sounoob.com.br', 'CEEE2C5274A149588A3A3F4211BE9C42', true);
+
 $payment = new Payment();
 $itens = array();
 $itens[] = array(

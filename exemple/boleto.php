@@ -1,6 +1,11 @@
 <?php
 include '../source/Boleto.php';
 
+//Conf::setProduction();
+//Conf::setSandbox();
+//Conf::setAccountCredentials('dev@sounoob.com.br', '497226512D9D415F95AAC791F72778DE', false);
+
+
 $boleto = new Boleto();
 /*
  * Campos obrigatórios
