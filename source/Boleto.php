@@ -139,6 +139,9 @@ class Boleto extends Utils
 
     public function send()
     {
+        if(Conf::isSandbox()) {
+            throw new Exception('API is not available in sandbox envolviment');
+        }
         $url = URL::getWs() . 'recurring-payment/boletos?email=' . Conf::getEmail() . '&token=' . Conf::getToken();
         $data = $this->build();
 
