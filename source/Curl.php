@@ -82,7 +82,6 @@ class Curl
             $data = http_build_query($data);
         }
         /*
-         * @todo implement GET method
          * @todo Test as send twice
          * @todo implement XML
          */
