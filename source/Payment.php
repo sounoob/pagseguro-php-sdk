@@ -12,6 +12,7 @@ class Payment extends Utils
     public function __construct()
     {
         $this->data['currency'] = 'BRL';
+        $this->data['shippingAddressRequired'] = 'true';
         $this->data['receiverEmail'] = Conf::getEmail();
         $this->data['reference'] = 'generated automatically in: ' . date('r');
     }
@@ -149,8 +150,22 @@ class Payment extends Utils
         $this->data['shippingAddressCountry'] = $shippingAddressCountry;
     }
 
+    public function skipAddress($skip = true)
+    {
+        $this->data['shippingAddressRequired'] = $skip === true ? 'false' : 'true';
+    }
+
     public function build()
     {
+        foreach ($this->data as $key => $row) {
+            if($this->data['shippingAddressRequired'] === true
+                && strpos($key, 'shipping') !== false
+                && $key != 'shippingAddressRequired') {
+                //PagSeguro error code 11057
+                throw new Exception('sender address not required with address data filled: ' . $key);
+                return false;
+            }
+        }
         $i = 1;
         foreach ($this->item as $item) {
             $this->data['itemId' . $i] = $item['id'];

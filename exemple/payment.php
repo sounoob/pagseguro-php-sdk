@@ -44,12 +44,13 @@ $payment->addItem(
     $item4['weight'],
     $item4['shippingCost']
 );
+//$payment->skipAddress();
 
 $payment->setShippingAddressState('SP');
 
 $payment->setShippingTypeSedex();
+//$payment->setShippingTypeOther();
+//$payment->setShippingTypePAC();
 
 $data = $payment->redirectCode();
 print_r($data);exit;
-
-echo $data;
