@@ -4,13 +4,13 @@ include_once "Config.php";
 include_once "Utils.php";
 include_once "Curl.php";
 
-class Boleto extends Utils
+class Boleto
 {
     private $data = array();
 
     public function setCustomerCPF($data)
     {
-        $data = $this->only_numbers($data);
+        $data = Utils::onlyNumbers($data);
 
         if (strlen($data) !== 11) {
             //PagSeguro error code 1114
@@ -22,7 +22,7 @@ class Boleto extends Utils
 
     public function setCustomerCNPJ($data)
     {
-        $data = $this->only_numbers($data);
+        $data = Utils::onlyNumbers($data);
 
         if (strlen($data) !== 14) {
             //PagSeguro error code 1115
@@ -56,10 +56,10 @@ class Boleto extends Utils
 
     public function setCustomerPhone($areaCode, $number)
     {
-        $areaCode = $this->only_numbers($areaCode);
+        $areaCode = Utils::onlyNumbers($areaCode);
         $areaCode = substr($areaCode, 0, 2);
 
-        $number = $this->only_numbers($number);
+        $number = Utils::onlyNumbers($number);
         $number = substr($number, 0, 9);
 
         if (strlen($areaCode) !== 2) {
@@ -92,7 +92,7 @@ class Boleto extends Utils
 
     public function setNumberOfPayments($data)
     {
-        $data = $this->only_numbers($data);
+        $data = Utils::onlyNumbers($data);
 
         if ($data < 1 || $data > 12) {
             //PagSeguro error code 1021
@@ -158,7 +158,7 @@ class Boleto extends Utils
 
     public function setCustomerAddressPostalCode($data)
     {
-        $data = $this->only_numbers($data);
+        $data = Utils::onlyNumbers($data);
         $this->data['customer']['address']['postalCode'] = $data;
     }
 
@@ -247,6 +247,6 @@ class Boleto extends Utils
         $curl->setData($data, 'json');
         $curl->setContentType('application/json;charset=ISO-8859-1');
         $curl->setAccept('application/json;charset=ISO-8859-1');
-        return $data = $curl->exec();
+        return $curl->exec();
     }
 }

@@ -4,7 +4,7 @@ include_once "Config.php";
 include_once "Utils.php";
 include_once "Curl.php";
 
-class TransactionDetails extends Utils
+class TransactionDetails
 {
     private $code = null;
     private $url = array(
@@ -39,6 +39,6 @@ class TransactionDetails extends Utils
 
         $curl = new Curl($url);
         $curl->setCustomRequest('GET');
-        return $data = $curl->exec();
+        return $curl->exec();
     }
 }

@@ -4,7 +4,7 @@ include_once "Config.php";
 include_once "Utils.php";
 include_once "Curl.php";
 
-class Payment extends Utils
+class Payment
 {
     private $data = array();
     private $item = array();
@@ -17,7 +17,7 @@ class Payment extends Utils
         $this->data['reference'] = 'generated automatically in: ' . date('r');
     }
 
-    public function additens(array $itens)
+    public function addItens(array $itens)
     {
         foreach ($itens as $row) {
             $row['amount'] = isset($row['amount']) ? $row['amount'] : 0;
@@ -61,17 +61,17 @@ class Payment extends Utils
 
     public function setSenderCPF($senderCPF)
     {
-        $senderCPF = $this->only_numbers($senderCPF);
+        $senderCPF = Utils::onlyNumbers($senderCPF);
         $senderCPF = substr($senderCPF, 0, 11);
         $this->data['senderCPF'] = $senderCPF;
     }
 
     public function setSenderPhone($senderAreaCode, $senderPhone)
     {
-        $senderAreaCode = $this->only_numbers($senderAreaCode);
+        $senderAreaCode = Utils::onlyNumbers($senderAreaCode);
         $senderAreaCode = substr($senderAreaCode, 0, 2);
 
-        $senderPhone = $this->only_numbers($senderPhone);
+        $senderPhone = Utils::onlyNumbers($senderPhone);
         $senderPhone = substr($senderPhone, 0, 9);
 
         $this->data['senderAreaCode'] = $senderAreaCode;
@@ -127,7 +127,7 @@ class Payment extends Utils
 
     public function setShippingAddressPostalCode($shippingAddressPostalCode)
     {
-        $shippingAddressPostalCode = $this->only_numbers($shippingAddressPostalCode);
+        $shippingAddressPostalCode = Utils::onlyNumbers($shippingAddressPostalCode);
         $this->data['shippingAddressPostalCode'] = $shippingAddressPostalCode;
     }
 
@@ -190,7 +190,7 @@ class Payment extends Utils
         $data = $this->build();
 
         $curl = new Curl($url, $data);
-        return $data = $curl->exec();
+        return $curl->exec();
     }
 
     public function checkoutCode()

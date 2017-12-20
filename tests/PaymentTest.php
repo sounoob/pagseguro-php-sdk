@@ -50,7 +50,7 @@ class PaymentTest extends \PHPUnit\Framework\TestCase
             'amount' => '330.00',
             'shippingCost' => '0.99',
         );
-        $payment->additens($itens);
+        $payment->addItens($itens);
 
         $item4 = array();
         $item4['id'] = 0004;

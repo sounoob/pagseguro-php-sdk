@@ -4,7 +4,7 @@ include_once "Config.php";
 include_once "Utils.php";
 include_once "Curl.php";
 
-class SearchTransaction extends Utils
+class SearchTransaction
 {
     private $url = array(
         'v2' => 'v2/transactions/',
@@ -47,6 +47,6 @@ class SearchTransaction extends Utils
 
         $curl = new Curl($url);
         $curl->setCustomRequest('GET');
-        return $this->result = $data = $curl->exec();
+        return $this->result = $curl->exec();
     }
 }

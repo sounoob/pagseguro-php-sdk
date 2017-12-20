@@ -38,6 +38,6 @@ class NotificationTransaction
 
         $curl = new Curl($url);
         $curl->setCustomRequest('GET');
-        return $data = $curl->exec();
+        return $curl->exec();
     }
 }
