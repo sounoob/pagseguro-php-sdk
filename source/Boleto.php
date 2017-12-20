@@ -1,13 +1,9 @@
 <?php
-
-include_once "Config.php";
+include_once "PagSeguro.php";
 include_once "Utils.php";
-include_once "Curl.php";
 
-class Boleto
+class Boleto extends PagSeguro
 {
-    private $data = array();
-
     public function setCustomerCPF($data)
     {
         $data = Utils::onlyNumbers($data);
@@ -16,8 +12,8 @@ class Boleto
             //PagSeguro error code 1114
             throw new InvalidArgumentException('customer document value is invalid. it must be a valid CPF: ' . $data);
         }
-        $this->data['customer']['document']['type'] = 'CPF';
-        $this->data['customer']['document']['value'] = $data;
+        $this->post['customer']['document']['type'] = 'CPF';
+        $this->post['customer']['document']['value'] = $data;
     }
 
     public function setCustomerCNPJ($data)
@@ -28,8 +24,8 @@ class Boleto
             //PagSeguro error code 1115
             throw new InvalidArgumentException('customer document value is invalid. it must be a valid CNPJ: ' . $data);
         }
-        $this->data['customer']['document']['type'] = 'CNPJ';
-        $this->data['customer']['document']['value'] = $data;
+        $this->post['customer']['document']['type'] = 'CNPJ';
+        $this->post['customer']['document']['value'] = $data;
     }
 
     public function setCustomerName($data)
@@ -38,7 +34,7 @@ class Boleto
             //PagSeguro error code 1121
             throw new InvalidArgumentException('name size is invalid. the maximum size is 50 characters: ' . $data);
         }
-        $this->data['customer']['name'] = $data;
+        $this->post['customer']['name'] = $data;
     }
 
     public function setCustomerEmail($data)
@@ -51,7 +47,7 @@ class Boleto
             //PagSeguro error code 1131
             throw new InvalidArgumentException('email size is invalid. the maximum size is 60 characters: ' . $data);
         }
-        $this->data['customer']['email'] = $data;
+        $this->post['customer']['email'] = $data;
     }
 
     public function setCustomerPhone($areaCode, $number)
@@ -72,8 +68,8 @@ class Boleto
             throw new InvalidArgumentException('phone number is invalid. it must be 8 or 9 digits without separator: ' . $number);
         }
 
-        $this->data['customer']['phone']['areaCode'] = $areaCode;
-        $this->data['customer']['phone']['number'] = $number;
+        $this->post['customer']['phone']['areaCode'] = $areaCode;
+        $this->post['customer']['phone']['number'] = $number;
     }
 
     public function setReference($data)
@@ -82,12 +78,12 @@ class Boleto
             //PagSeguro error code 1001
             throw new InvalidArgumentException('maximum reference size is 200: ' . $data);
         }
-        $this->data['reference'] = $data;
+        $this->post['reference'] = $data;
     }
 
     public function setFirstDueDate($data)
     {
-        $this->data['firstDueDate'] = $data;
+        $this->post['firstDueDate'] = $data;
     }
 
     public function setNumberOfPayments($data)
@@ -98,7 +94,7 @@ class Boleto
             //PagSeguro error code 1021
             throw new InvalidArgumentException('numberOfPayments is invalid. it must have only numbers (0-9) and value between 1 to 12.: ' . $data);
         }
-        $this->data['numberOfPayments'] = $data;
+        $this->post['numberOfPayments'] = $data;
     }
 
     public function setAmount($data)
@@ -108,7 +104,7 @@ class Boleto
             //PagSeguro error code 1041
             throw new InvalidArgumentException('amount is invalid. it is allowed value between 5.00 to 1000000.00.: ' . $data);
         }
-        $this->data['amount'] = $data;
+        $this->post['amount'] = $data;
     }
 
     public function setDescription($data)
@@ -117,7 +113,7 @@ class Boleto
             //PagSeguro error code 1061
             throw new InvalidArgumentException('description is invalid. the maximum size is 100 characters: ' . $data);
         }
-        $this->data['description'] = $data;
+        $this->post['description'] = $data;
     }
 
     public function setInstructions($data)
@@ -126,7 +122,7 @@ class Boleto
             //PagSeguro error code 1050
             throw new InvalidArgumentException('instructions is invalid. the maximum size is 100 characters: ' . $data);
         }
-        $this->data['instructions'] = $data;
+        $this->post['instructions'] = $data;
     }
 
     public function setNotificationURL($data)
@@ -136,103 +132,95 @@ class Boleto
             //erro 500 when dont use http and is close to maximum size
             throw new InvalidArgumentException('notificarionURL is invalid. the maximum size is 255 characters and should be a valid url ' . $data);
         }
-        $this->data['notificationURL'] = $data;
+        $this->post['notificationURL'] = $data;
     }
     /*
      * @todo check address erros.
      */
     public function setCustomerAddressStreet($data)
     {
-        $this->data['customer']['address']['street'] = $data;
+        $this->post['customer']['address']['street'] = $data;
     }
 
     public function setCustomerAddressNumber($data)
     {
-        $this->data['customer']['address']['number'] = $data;
+        $this->post['customer']['address']['number'] = $data;
     }
 
     public function setCustomerAddressDistrict($data)
     {
-        $this->data['customer']['address']['district'] = $data;
+        $this->post['customer']['address']['district'] = $data;
     }
 
     public function setCustomerAddressPostalCode($data)
     {
         $data = Utils::onlyNumbers($data);
-        $this->data['customer']['address']['postalCode'] = $data;
+        $this->post['customer']['address']['postalCode'] = $data;
     }
 
     public function setCustomerAddressCity($data)
     {
-        $this->data['customer']['address']['city'] = $data;
+        $this->post['customer']['address']['city'] = $data;
     }
 
     public function setCustomerAddressState($data)
     {
         $data = strtoupper($data);
         if (strlen($data) === 2) {
-            $this->data['customer']['address']['state'] = $data;
+            $this->post['customer']['address']['state'] = $data;
         }
     }
 
-    private function requiredFields()
+    protected function requiredFields()
     {
-        if (!isset($this->data['amount'])) {
+        if (!isset($this->post['amount'])) {
             //PagSeguro error code 1040
             throw new Exception('amount is required');
         }
-        if (!isset($this->data['description'])) {
+        if (!isset($this->post['description'])) {
             //PagSeguro error code 1060
             throw new Exception('description is required');
         }
-        if (!isset($this->data['customer']['document'])) {
+        if (!isset($this->post['customer']['document'])) {
             //PagSeguro error code 1110
             throw new Exception('customer document is required');
         }
-        if (!isset($this->data['customer']['document']['type'])) {
+        if (!isset($this->post['customer']['document']['type'])) {
             //prevents erro 500
             throw new Exception('customer document type is required');
         }
-        if (!isset($this->data['customer']['document']['value'])) {
+        if (!isset($this->post['customer']['document']['value'])) {
             //PagSeguro error code 1113
             throw new Exception('customer document value is required');
         }
-        if (!isset($this->data['customer']['name'])) {
+        if (!isset($this->post['customer']['name'])) {
             //PagSeguro error code 1120
             throw new Exception('name is required');
         }
-        if (!isset($this->data['customer']['email'])) {
+        if (!isset($this->post['customer']['email'])) {
             //PagSeguro error code 1130
             throw new Exception('email is required');
         }
-        if (!isset($this->data['customer']['phone'])) {
+        if (!isset($this->post['customer']['phone'])) {
             //PagSeguro error code 1140
             throw new Exception('customer phone is required');
         }
     }
 
-    private function requiredFieldsButNot()
+    protected function requiredFieldsButNot()
     {
-        if (!isset($this->data['periodicity'])) {
-            $this->data['periodicity'] = 'monthly';
+        if (!isset($this->post['periodicity'])) {
+            $this->post['periodicity'] = 'monthly';
         }
-        if (!isset($this->data['numberOfPayments'])) {
-            $this->data['numberOfPayments'] = 1;
+        if (!isset($this->post['numberOfPayments'])) {
+            $this->post['numberOfPayments'] = 1;
         }
-        if (!isset($this->data['reference'])) {
-            $this->data['reference'] = 'generated automatically in: ' . date('r');
+        if (!isset($this->post['reference'])) {
+            $this->post['reference'] = 'generated automatically in: ' . date('r');
         }
-        if (!isset($this->data['firstDueDate'])) {
-            $this->data['firstDueDate'] = date("Y-m-d", strtotime("+3 days", time()));
+        if (!isset($this->post['firstDueDate'])) {
+            $this->post['firstDueDate'] = date("Y-m-d", strtotime("+3 days", time()));
         }
-    }
-
-    public function build()
-    {
-        $this->requiredFields();
-        $this->requiredFieldsButNot();
-
-        return $this->data;
     }
 
     public function send()
@@ -240,13 +228,9 @@ class Boleto
         if (Conf::isSandbox()) {
             throw new Exception('API is not available in sandbox envolviment');
         }
-        $url = URL::getWs() . 'recurring-payment/boletos?email=' . Conf::getEmail() . '&token=' . Conf::getToken();
-        $data = $this->build();
-
-        $curl = new Curl($url);
-        $curl->setData($data, 'json');
-        $curl->setContentType('application/json;charset=ISO-8859-1');
-        $curl->setAccept('application/json;charset=ISO-8859-1');
-        return $curl->exec();
+        $this->url = 'recurring-payment/boletos';
+        $this->curl->setContentType('application/json;charset=ISO-8859-1');
+        $this->curl->setAccept('application/json;charset=ISO-8859-1');
+        return parent::send();
     }
 }

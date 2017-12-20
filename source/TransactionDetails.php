@@ -1,13 +1,12 @@
 <?php
 
-include_once "Config.php";
+include_once "PagSeguro.php";
 include_once "Utils.php";
-include_once "Curl.php";
 
-class TransactionDetails
+class TransactionDetails extends PagSeguro
 {
     private $code = null;
-    private $url = array(
+    private $seguiment = array(
         'v2' => 'v2/transactions/',
         'v3' => 'v3/transactions/',
     );
@@ -16,6 +15,8 @@ class TransactionDetails
 
     public function __construct($code, $version = 'v3')
     {
+        parent::__construct();
+
         $this->code = $code;
         if (strlen($this->code) !== 32 && strlen($this->code) !== 36) {
             //PagSeguro error code 13003
@@ -27,7 +28,7 @@ class TransactionDetails
 
     public function setVersion($version)
     {
-        if (!isset($this->url[$version])) {
+        if (!isset($this->seguiment[$version])) {
             throw new InvalidArgumentException('invalid API version: ' . $this->version);
         }
         $this->version = $version;
@@ -35,10 +36,7 @@ class TransactionDetails
 
     public function send()
     {
-        $url = URL::getWs() . $this->url[$this->version] . $this->code . '/?email=' . Conf::getEmail() . '&token=' . Conf::getToken();
-
-        $curl = new Curl($url);
-        $curl->setCustomRequest('GET');
-        return $curl->exec();
+        $this->url = $this->seguiment[$this->version] . $this->code;
+        return parent::send();
     }
 }

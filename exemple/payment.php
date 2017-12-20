@@ -52,5 +52,5 @@ $payment->setShippingTypeSedex();
 //$payment->setShippingTypeOther();
 //$payment->setShippingTypePAC();
 
-$data = $payment->redirectCode();
-print_r($data);exit;
+$payment->send();
+print_r($payment);exit;

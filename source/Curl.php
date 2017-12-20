@@ -5,7 +5,7 @@ class Curl
     private $data = array();
     private $curl = null;
     private $url = null;
-    private $customRequest = 'POST';
+    private $customRequest = 'GET';
 
     /**
      * Curl constructor.
@@ -56,11 +56,6 @@ class Curl
         $this->header[] = $header;
     }
 
-    public function getData()
-    {
-        return $this->data;
-    }
-
     public function setContentType($data)
     {
         $this->header[] = 'Content-type:' . $data;
@@ -71,11 +66,28 @@ class Curl
         $this->header[] = 'Accept:' . $data;
     }
 
+    private function detectDataFormat()
+    {
+        $format = 'x-www-form-urlencoded';
+        foreach ($this->header as $row) {
+            if(strpos($row, 'Content-type') !== false) {
+                if(strpos($row, 'json') !== false) {
+                    $format = 'json';
+                }elseif(strpos($row, 'xml') !== false) {
+                    $format = 'xml';
+                }
+            }
+        }
+        return $format;
+    }
+
     /**
      * @param array $data
      */
-    public function setData($data, $format = 'x-www-form-urlencoded')
+    public function setData($data)
     {
+        $format = $this->detectDataFormat();
+
         if($format == 'json') {
             $data = json_encode($data);
         }else{
@@ -86,7 +98,7 @@ class Curl
          * @todo implement XML
          */
         curl_setopt($this->curl, CURLOPT_POSTFIELDS, $data);
-        $this->data = $data;
+        $this->setCustomRequest('POST');
     }
 
     public function parse_header()
@@ -112,7 +124,7 @@ class Curl
          */
 
         if($error) {
-            $return = false;
+            $return = $error;
         } elseif (strlen($data) === 0 || $data == 'Unauthorized') {
             throw new Exception('E-mail or token is invalid in this envolviment: ' . (Conf::isSandbox() ? 'Sandobx' : 'Production'));
         } elseif ($data{0} == '{') {

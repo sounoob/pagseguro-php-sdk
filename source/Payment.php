@@ -1,20 +1,21 @@
 <?php
 
-include_once "Config.php";
 include_once "Utils.php";
-include_once "Curl.php";
+include_once "PagSeguro.php";
 
-class Payment
+class Payment extends PagSeguro
 {
-    private $data = array();
     private $item = array();
+    public $redirecURL = null;
 
     public function __construct()
     {
-        $this->data['currency'] = 'BRL';
-        $this->data['shippingAddressRequired'] = 'true';
-        $this->data['receiverEmail'] = Conf::getEmail();
-        $this->data['reference'] = 'generated automatically in: ' . date('r');
+        parent::__construct();
+
+        $this->post['currency'] = 'BRL';
+        $this->post['shippingAddressRequired'] = 'true';
+        $this->post['receiverEmail'] = Conf::getEmail();
+        $this->post['reference'] = 'generated automatically in: ' . date('r');
     }
 
     public function addItens(array $itens)
@@ -41,29 +42,29 @@ class Payment
 
     public function setExtraAmount($extraAmount)
     {
-        $this->data['extraAmount'] = $extraAmount;
+        $this->post['extraAmount'] = $extraAmount;
     }
 
     public function setReference($reference)
     {
-        $this->data['reference'] = $reference;
+        $this->post['reference'] = $reference;
     }
 
     public function setRedirectUrl($url)
     {
-        $this->data['redirectURL'] = $url;
+        $this->post['redirectURL'] = $url;
     }
 
     public function setSenderName($senderName)
     {
-        $this->data['senderName'] = $senderName;
+        $this->post['senderName'] = $senderName;
     }
 
     public function setSenderCPF($senderCPF)
     {
         $senderCPF = Utils::onlyNumbers($senderCPF);
         $senderCPF = substr($senderCPF, 0, 11);
-        $this->data['senderCPF'] = $senderCPF;
+        $this->post['senderCPF'] = $senderCPF;
     }
 
     public function setSenderPhone($senderAreaCode, $senderPhone)
@@ -74,14 +75,14 @@ class Payment
         $senderPhone = Utils::onlyNumbers($senderPhone);
         $senderPhone = substr($senderPhone, 0, 9);
 
-        $this->data['senderAreaCode'] = $senderAreaCode;
-        $this->data['senderPhone'] = $senderPhone;
+        $this->post['senderAreaCode'] = $senderAreaCode;
+        $this->post['senderPhone'] = $senderPhone;
     }
 
     public function setSenderEmail($senderEmail)
     {
         $senderEmail = filter_var($senderEmail, FILTER_VALIDATE_EMAIL);
-        $this->data['senderEmail'] = $senderEmail;
+        $this->post['senderEmail'] = $senderEmail;
     }
 
     public function setShippingTypePAC()
@@ -102,105 +103,116 @@ class Payment
 
     private function setShippingType($shippingType)
     {
-        $this->data['shippingType'] = $shippingType;
+        $this->post['shippingType'] = $shippingType;
     }
 
     public function setShippingAddressStreet($shippingAddressStreet)
     {
-        $this->data['shippingAddressStreet'] = $shippingAddressStreet;
+        $this->post['shippingAddressStreet'] = $shippingAddressStreet;
     }
 
     public function setShippingAddressNumber($shippingAddressNumber)
     {
-        $this->data['shippingAddressNumber'] = $shippingAddressNumber;
+        $this->post['shippingAddressNumber'] = $shippingAddressNumber;
     }
 
     public function setShippingAddressComplement($shippingAddressComplement)
     {
-        $this->data['shippingAddressComplement'] = $shippingAddressComplement;
+        $this->post['shippingAddressComplement'] = $shippingAddressComplement;
     }
 
     public function setShippingAddressDistrict($shippingAddressDistrict)
     {
-        $this->data['shippingAddressDistrict'] = $shippingAddressDistrict;
+        $this->post['shippingAddressDistrict'] = $shippingAddressDistrict;
     }
 
     public function setShippingAddressPostalCode($shippingAddressPostalCode)
     {
         $shippingAddressPostalCode = Utils::onlyNumbers($shippingAddressPostalCode);
-        $this->data['shippingAddressPostalCode'] = $shippingAddressPostalCode;
+        $this->post['shippingAddressPostalCode'] = $shippingAddressPostalCode;
     }
 
     public function setShippingAddressCity($shippingAddressCity)
     {
-        $this->data['shippingAddressCity'] = $shippingAddressCity;
+        $this->post['shippingAddressCity'] = $shippingAddressCity;
     }
 
     public function setShippingAddressState($shippingAddressState)
     {
         $shippingAddressState = strtoupper($shippingAddressState);
         if (strlen($shippingAddressState) === 2) {
-            $this->data['shippingAddressState'] = $shippingAddressState;
+            $this->post['shippingAddressState'] = $shippingAddressState;
         }
     }
 
 
     public function setShippingAddressCountry($shippingAddressCountry)
     {
-        $this->data['shippingAddressCountry'] = $shippingAddressCountry;
+        $this->post['shippingAddressCountry'] = $shippingAddressCountry;
     }
 
     public function skipAddress($skip = true)
     {
-        $this->data['shippingAddressRequired'] = $skip === true ? 'false' : 'true';
+        $this->post['shippingAddressRequired'] = $skip === true ? 'false' : 'true';
+    }
+
+    private function buildItem()
+    {
+        $count = 1;
+        foreach ($this->item as $item) {
+            $this->post['itemId' . $count] = $item['id'];
+            $this->post['itemDescription' . $count] = $item['description'];
+            $this->post['itemAmount' . $count] = $item['amount'];
+            $this->post['itemQuantity' . $count] = $item['quantity'];
+            if ($item['weight']) {
+                $this->post['itemWeight' . $count] = $item['weight'];
+            }
+            if ($item['shippingCost']) {
+                $this->post['itemShippingCost' . $count] = $item['shippingCost'];
+            }
+            $count++;
+        }
     }
 
     public function build()
     {
-        foreach ($this->data as $key => $row) {
-            if($this->data['shippingAddressRequired'] === true
+        foreach ($this->post as $key => $row) {
+            if($this->post['shippingAddressRequired'] === true
                 && strpos($key, 'shipping') !== false
                 && $key != 'shippingAddressRequired') {
                 //PagSeguro error code 11057
                 throw new Exception('sender address not required with address data filled: ' . $key);
-                return false;
             }
         }
-        $i = 1;
-        foreach ($this->item as $item) {
-            $this->data['itemId' . $i] = $item['id'];
-            $this->data['itemDescription' . $i] = $item['description'];
-            $this->data['itemAmount' . $i] = $item['amount'];
-            $this->data['itemQuantity' . $i] = $item['quantity'];
-            if ($item['weight']) {
-                $this->data['itemWeight' . $i] = $item['weight'];
-            }
-            if ($item['shippingCost']) {
-                $this->data['itemShippingCost' . $i] = $item['shippingCost'];
-            }
-            $i++;
-        }
+        $this->buildItem();
+        parent::build();
 
-        return $this->data;
+        return $this->post;
     }
 
     public function send()
     {
-        $url = URL::getWs() . 'v2/checkout?email=' . Conf::getEmail() . '&token=' . Conf::getToken();
-        $data = $this->build();
+        $this->url = 'v2/checkout';
+        parent::send();
 
-        $curl = new Curl($url, $data);
-        return $curl->exec();
+        $this->redirecURL = URL::getPage() . 'v2/checkout/payment.html?code=' . $this->result->code;
     }
-
+    /**
+     * @deprecated deprecated
+     */
     public function checkoutCode()
     {
         $data = $this->send();
         return isset($data->code) ? $data->code : false;
     }
-
+    /**
+     * @deprecated deprecated
+     */
     public function redirectCode()
     {
-        return URL::getPage() . 'v2/checkout/payment.html?code=' . $this->checkoutCode();
+        if(!$this->result) {
+            $this->send();
+        }
+        return $this->redirecURL;
     }
 }

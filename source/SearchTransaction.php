@@ -1,12 +1,10 @@
 <?php
-
-include_once "Config.php";
+include_once "PagSeguro.php";
 include_once "Utils.php";
-include_once "Curl.php";
 
-class SearchTransaction
+class SearchTransaction extends PagSeguro
 {
-    private $url = array(
+    private $seguiment = array(
         'v2' => 'v2/transactions/',
         'v3' => 'v3/transactions/',
     );
@@ -16,26 +14,27 @@ class SearchTransaction
 
     public function __construct($version = 'v3')
     {
+        parent::__construct();
         $this->setVersion($version);
     }
 
     public function setReference($data)
     {
-        $this->filter['reference'] = $data;
+        $this->get['reference'] = $data;
     }
 
     public function setFinalDate($data)
     {
-        $this->filter['finalDate'] = $data;
+        $this->get['finalDate'] = $data;
     }
     public function setInitialDate($data)
     {
-        $this->filter['initialDate'] = $data;
+        $this->get['initialDate'] = $data;
     }
 
     public function setVersion($version)
     {
-        if (!isset($this->url[$version])) {
+        if (!isset($this->seguiment[$version])) {
             throw new InvalidArgumentException('invalid API version: ' . $this->version);
         }
         $this->version = $version;
@@ -43,10 +42,7 @@ class SearchTransaction
 
     public function send()
     {
-        $url = URL::getWs() . $this->url[$this->version] . '/?email=' . Conf::getEmail() . '&token=' . Conf::getToken() . '&' . http_build_query($this->filter);
-
-        $curl = new Curl($url);
-        $curl->setCustomRequest('GET');
-        return $this->result = $curl->exec();
+        $this->url = $this->seguiment[$this->version];
+        return parent::send();
     }
 }
