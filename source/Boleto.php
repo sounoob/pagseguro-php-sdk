@@ -8,7 +8,7 @@ class Boleto extends PagSeguro
     {
         $data = Utils::onlyNumbers($data);
 
-        if (strlen($data) !== 11) {
+        if (!Utils::checkCPF($data)) {
             //PagSeguro error code 1114
             throw new InvalidArgumentException('customer document value is invalid. it must be a valid CPF: ' . $data);
         }
