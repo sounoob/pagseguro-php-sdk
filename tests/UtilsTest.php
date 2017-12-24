@@ -1,6 +1,6 @@
 <?php
 
-include_once 'core/Utils.php';
+include_once 'source/core/Utils.php';
 
 class UtilsTest extends \PHPUnit\Framework\TestCase
 {
