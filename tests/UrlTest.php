@@ -1,8 +1,8 @@
 <?php
 
-include_once 'source/config/Config.php';
+include_once 'source/config/Url.php';
 
-class ConfigTest extends \PHPUnit\Framework\TestCase
+class UrlTest extends \PHPUnit\Framework\TestCase
 {
     public function testProdUrl()
     {
