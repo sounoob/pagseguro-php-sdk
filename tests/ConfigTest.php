@@ -1,6 +1,6 @@
 <?php
 
-include_once 'source/Config.php';
+include_once 'source/config/Config.php';
 
 class ConfigTest extends \PHPUnit\Framework\TestCase
 {
@@ -19,19 +19,5 @@ class ConfigTest extends \PHPUnit\Framework\TestCase
 
         Config::setSandbox();
         $this->assertEquals(32, strlen(Config::getToken()));
-    }
-
-    public function testUrl()
-    {
-        Config::setProduction();
-        $this->assertEquals('https://ws.pagseguro.uol.com.br/', URL::getWs());
-        $this->assertEquals('https://pagseguro.uol.com.br/', URL::getPage());
-        $this->assertEquals('https://stc.pagseguro.uol.com.br/', URL::getStc());
-
-
-        Config::setSandbox();
-        $this->assertEquals('https://ws.sandbox.pagseguro.uol.com.br/', URL::getWs());
-        $this->assertEquals('https://sandbox.pagseguro.uol.com.br/', URL::getPage());
-        $this->assertEquals('https://stc.sandbox.pagseguro.uol.com.br/', URL::getStc());
     }
 }
