@@ -1,7 +1,7 @@
 <?php
 
-include_once "Utils.php";
-include_once "PagSeguro.php";
+include_once "core/Utils.php";
+include_once "core/PagSeguro.php";
 
 class Payment extends PagSeguro
 {
@@ -14,7 +14,7 @@ class Payment extends PagSeguro
 
         $this->post['currency'] = 'BRL';
         $this->post['shippingAddressRequired'] = 'true';
-        $this->post['receiverEmail'] = Conf::getEmail();
+        $this->post['receiverEmail'] = Config::getEmail();
         $this->post['reference'] = 'generated automatically in: ' . date('r');
     }
 

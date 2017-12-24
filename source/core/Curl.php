@@ -126,7 +126,7 @@ class Curl
         if($error) {
             $return = $error;
         } elseif (strlen($data) === 0 || $data == 'Unauthorized') {
-            throw new Exception('E-mail or token is invalid in this envolviment: ' . (Conf::isSandbox() ? 'Sandobx' : 'Production'));
+            throw new Exception('E-mail or token is invalid in this envolviment: ' . (Config::isSandbox() ? 'Sandobx' : 'Production'));
         } elseif ($data{0} == '{') {
             $return = json_decode($data);
         } elseif (strpos($data, '<?xml') !== false) {

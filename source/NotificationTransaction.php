@@ -1,6 +1,6 @@
 <?php
 
-include_once "PagSeguro.php";
+include_once "core/PagSeguro.php";
 
 class NotificationTransaction extends PagSeguro
 {

@@ -1,6 +1,6 @@
 <?php
-include_once "PagSeguro.php";
-include_once "Utils.php";
+include_once "core/PagSeguro.php";
+include_once "core/Utils.php";
 
 class SearchTransaction extends PagSeguro
 {

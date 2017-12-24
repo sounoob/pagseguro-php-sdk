@@ -2,9 +2,9 @@
 date_default_timezone_set('America/Sao_Paulo');
 
 /**
- * Class Conf
+ * Class Config
  */
-class Conf
+class Config
 {
     /**
      * @var bool
@@ -77,32 +77,3 @@ class Conf
     }
 }
 
-/**
- * Class URL
- */
-class URL
-{
-    /**
-     * @return string
-     */
-    public static function getWs()
-    {
-        return Conf::isSandbox() ? 'https://ws.sandbox.pagseguro.uol.com.br/' : 'https://ws.pagseguro.uol.com.br/';
-    }
-
-    /**
-     * @return string
-     */
-    public static function getPage()
-    {
-        return Conf::isSandbox() ? 'https://sandbox.pagseguro.uol.com.br/' : 'https://pagseguro.uol.com.br/';
-    }
-
-    /**
-     * @return string
-     */
-    public static function getStc()
-    {
-        return Conf::isSandbox() ? 'https://stc.sandbox.pagseguro.uol.com.br/' : 'https://stc.pagseguro.uol.com.br/';
-    }
-}

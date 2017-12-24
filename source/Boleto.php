@@ -1,6 +1,6 @@
 <?php
-include_once "PagSeguro.php";
-include_once "Utils.php";
+include_once "core/PagSeguro.php";
+include_once "core/Utils.php";
 
 class Boleto extends PagSeguro
 {
@@ -225,7 +225,7 @@ class Boleto extends PagSeguro
 
     public function send()
     {
-        if (Conf::isSandbox()) {
+        if (Config::isSandbox()) {
             throw new Exception('API is not available in sandbox envolviment');
         }
         $this->url = 'recurring-payment/boletos';

@@ -1,5 +1,6 @@
 <?php
-include_once "Config.php";
+include_once dirname(__FILE__) . "/../config/Config.php";
+include_once dirname(__FILE__) . "/../config/Url.php";
 include_once "Curl.php";
 
 class PagSeguro
@@ -28,8 +29,8 @@ class PagSeguro
 
     private function buildURL()
     {
-        $this->get['email'] = Conf::getEmail();
-        $this->get['token'] = Conf::getToken();
+        $this->get['email'] = Config::getEmail();
+        $this->get['token'] = Config::getToken();
 
         $this->url = URL::getWs() . $this->url . '?' . http_build_query($this->get);
 

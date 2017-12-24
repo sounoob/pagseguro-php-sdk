@@ -1,9 +1,9 @@
 <?php
 include '../source/SearchTransaction.php';
 
-//Conf::setProduction();
-//Conf::setSandbox();
-//Conf::setAccountCredentials('dev@sounoob.com.br', '497226512D9D415F95AAC791F72778DE', true);
+//Config::setProduction();
+//Config::setSandbox();
+//Config::setAccountCredentials('dev@sounoob.com.br', '497226512D9D415F95AAC791F72778DE', true);
 
 $transactions = new SearchTransaction();
 //Data inicial padrão 2017-10-15T19:11
