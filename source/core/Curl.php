@@ -14,6 +14,9 @@ class Curl
      */
     public function __construct($url = null, array $data = array(), array $header = array())
     {
+        if (!extension_loaded("curl")) {
+            throw new Exception("cURL extension is required!");
+        }
         $this->curl = curl_init();
 
         if($url !== null) {
