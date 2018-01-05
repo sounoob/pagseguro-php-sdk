@@ -10,7 +10,7 @@
     "require": {
         "php": ">=5.4.45",
         "phpunit/phpunit": "4.8.*"
-    }
+    },
     "minimum-stability": "dev",
     "prefer-stable": true
 }
