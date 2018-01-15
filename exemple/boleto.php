@@ -15,7 +15,7 @@ $boleto->setAmount('5.12');
 //Descrição do boleto
 $boleto->setDescription('Assinatura SDK SNoob');
 //O CPF do comprador
-$boleto->setCustomerCPF('01234567890');
+$boleto->setCustomerCPF('01234567890');//Se for CNPJ use $boleto->setCustomerCNPJ('33085736000169');
 //Nome do comprador
 $boleto->setCustomerName('Noob Master');
 //Email do comprador
