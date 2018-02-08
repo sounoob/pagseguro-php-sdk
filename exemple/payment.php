@@ -3,7 +3,7 @@ include '../source/Payment.php';
 
 //Config::setProduction();
 Config::setSandbox();
-//Config::setAccountCredentials('dev@sounoob.com.br', 'CEEE2C5274A149588A3A3F4211BE9C42', true);
+//Config::setAccountCredentials('dev@sounoob.com.br', '5179DCD806314BD6A77B774DF6148CA9', true);
 
 $payment = new Payment();
 $itens = array();

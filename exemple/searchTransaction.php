@@ -3,7 +3,7 @@ include '../source/SearchTransaction.php';
 
 //Config::setProduction();
 //Config::setSandbox();
-//Config::setAccountCredentials('dev@sounoob.com.br', '497226512D9D415F95AAC791F72778DE', true);
+//Config::setAccountCredentials('dev@sounoob.com.br', '5179DCD806314BD6A77B774DF6148CA9', true);
 
 $transactions = new SearchTransaction();
 //Data inicial padrão 2017-10-15T19:11

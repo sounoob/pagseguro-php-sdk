@@ -3,7 +3,7 @@ include '../source/Boleto.php';
 
 //Config::setProduction();
 //Config::setSandbox();
-//Config::setAccountCredentials('dev@sounoob.com.br', '497226512D9D415F95AAC791F72778DE', false);
+//Config::setAccountCredentials('dev@sounoob.com.br', '5179DCD806314BD6A77B774DF6148CA9', false);
 
 
 $boleto = new Boleto();
