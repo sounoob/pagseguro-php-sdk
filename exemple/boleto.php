@@ -21,7 +21,7 @@ $boleto->setCustomerName('Noob Master');
 //Email do comprador
 $boleto->setCustomerEmail('financeiro@sounoob.com.br');
 //Telefone do comprador
-$boleto->setCustomerPhone('11','98909084');
+$boleto->setCustomerPhone('11', '98909084');
 
 
 /*
@@ -30,7 +30,7 @@ $boleto->setCustomerPhone('11','98909084');
 //Data de vencimento do boleto no formato de Ano-Mês-Dia. Essa data precisa ser no futuro, e no máximo 30 dias apatir do dia atual.
 $boleto->setFirstDueDate(date("Y-m-d", strtotime("+3 days", time())));
 //Esse é o numero de boletos a ser gerado.
-$boleto->setNumberOfPayments(1);
+$boleto->setNumberOfPayments(2);
 //Uma referência de quem é o boleto (note que terá multiplos boletos com a mesma referência)
 $boleto->setReference('Referencia Qualquer');//**
 //Instruções para quem irá receber o pagamento
@@ -51,4 +51,12 @@ $boleto->setCustomerAddressState('SP');
 
 //Executa a conexão e captura a resposta do PagSeguro.
 $data = $boleto->send();
-print_r($data);exit;
+
+//Você terá uma array de objeto, precisará de uma estrutura de laço para percorrer um a um.
+foreach ($data->boletos as $row) {
+    echo 'A transação de código ' . $row->code .
+        ' que vence em ' . $row->dueDate .
+        ' gerou um boleto que pode ser acessado no link ' . $row->paymentLink .
+        ' ou pago com o código de barras ' . $row->barcode .
+        '<hr>';
+}
