@@ -17,7 +17,7 @@ class Config
     /**
      * @var string
      */
-    private static $tokenProduction = "CD4AAA2D67444AD58CCE6580DC8A4D22";
+    private static $tokenProduction = "ECBEA46582584EE6BFDCAF5CD3D7878A";
     /**
      * @var string
      */
