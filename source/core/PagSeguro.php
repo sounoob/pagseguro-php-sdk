@@ -1,9 +1,6 @@
 <?php
 namespace Sounoob\pagseguro\core;
 
-use Sounoob\pagseguro\config\Config;
-use Sounoob\pagseguro\config\URL;
-
 class PagSeguro
 {
     protected $post = array();
@@ -30,10 +27,10 @@ class PagSeguro
 
     private function buildURL()
     {
-        $this->get['email'] = Config::getEmail();
-        $this->get['token'] = Config::getToken();
+        $this->get['email'] = \Sounoob\pagseguro\config\Config::getEmail();
+        $this->get['token'] = \Sounoob\pagseguro\config\Config::getToken();
 
-        $this->url = URL::getWs() . $this->url . '?' . http_build_query($this->get);
+        $this->url = \Sounoob\pagseguro\config\URL::getWs() . $this->url . '?' . http_build_query($this->get);
 
         $this->curl->setUrl($this->url);
     }

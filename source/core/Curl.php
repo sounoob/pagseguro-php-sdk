@@ -1,7 +1,5 @@
 <?php
 namespace Sounoob\pagseguro\core;
-
-use Sounoob\pagseguro\config\Config;
 use Exception;
 
 class Curl
@@ -134,7 +132,7 @@ class Curl
         if($error) {
             $return = $error;
         } elseif (strlen($data) === 0 || $data == 'Unauthorized') {
-            throw new Exception('E-mail or token is invalid in this environment: ' . (Config::isSandbox() ? 'Sandobx' : 'Production'));
+            throw new Exception('E-mail or token is invalid in this environment: ' . (\Sounoob\pagseguro\config\Config::isSandbox() ? 'Sandobx' : 'Production'));
         } elseif ($data{0} == '{') {
             $return = json_decode($data);
         } elseif (strpos($data, '<?xml') !== false) {
