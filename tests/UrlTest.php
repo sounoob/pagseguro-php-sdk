@@ -1,21 +1,20 @@
 <?php
-
-include_once 'source/config/Url.php';
+include '../vendor/autoload.php';
 
 class UrlTest extends \PHPUnit\Framework\TestCase
 {
     public function testProdUrl()
     {
-        Config::setProduction();
-        $this->assertEquals('https://ws.pagseguro.uol.com.br/', URL::getWs());
-        $this->assertEquals('https://pagseguro.uol.com.br/', URL::getPage());
-        $this->assertEquals('https://stc.pagseguro.uol.com.br/', URL::getStc());
+        \Sounoob\pagseguro\config\Config::setProduction();
+        $this->assertEquals('https://ws.pagseguro.uol.com.br/', \Sounoob\pagseguro\config\URL::getWs());
+        $this->assertEquals('https://pagseguro.uol.com.br/', \Sounoob\pagseguro\config\URL::getPage());
+        $this->assertEquals('https://stc.pagseguro.uol.com.br/', \Sounoob\pagseguro\config\URL::getStc());
     }
     public function testSandboxUrl()
     {
-        Config::setSandbox();
-        $this->assertEquals('https://ws.sandbox.pagseguro.uol.com.br/', URL::getWs());
-        $this->assertEquals('https://sandbox.pagseguro.uol.com.br/', URL::getPage());
-        $this->assertEquals('https://stc.sandbox.pagseguro.uol.com.br/', URL::getStc());
+        \Sounoob\pagseguro\config\Config::setSandbox();
+        $this->assertEquals('https://ws.sandbox.pagseguro.uol.com.br/', \Sounoob\pagseguro\config\URL::getWs());
+        $this->assertEquals('https://sandbox.pagseguro.uol.com.br/', \Sounoob\pagseguro\config\URL::getPage());
+        $this->assertEquals('https://stc.sandbox.pagseguro.uol.com.br/', \Sounoob\pagseguro\config\URL::getStc());
     }
 }

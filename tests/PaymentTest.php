@@ -1,12 +1,12 @@
 <?php
+include '../vendor/autoload.php';
 
-include_once 'source/Payment.php';
 
 class PaymentTest extends \PHPUnit\Framework\TestCase
 {
     public function testPhone()
     {
-        $payment = new Payment();
+        $payment = new \Sounoob\pagseguro\Payment();
 
         $payment->setSenderPhone(11, 9890151514);
 
@@ -18,7 +18,7 @@ class PaymentTest extends \PHPUnit\Framework\TestCase
 
     public function testCPF()
     {
-        $payment = new Payment();
+        $payment = new \Sounoob\pagseguro\Payment();
 
         $payment->setSenderCPF('012.345.678-906');
 
@@ -29,7 +29,7 @@ class PaymentTest extends \PHPUnit\Framework\TestCase
 
     public function testItem()
     {
-        $payment = new Payment();
+        $payment = new \Sounoob\pagseguro\Payment();
         $itens = array();
         $itens[] = array(
             'id' => '0001',
