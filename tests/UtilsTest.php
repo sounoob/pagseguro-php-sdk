@@ -1,6 +1,4 @@
 <?php
-include 'vendor/autoload.php';
-
 class UtilsTest extends \PHPUnit\Framework\TestCase
 {
     public function testNumbers()

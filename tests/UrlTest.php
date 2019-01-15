@@ -1,6 +1,4 @@
 <?php
-include 'vendor/autoload.php';
-
 class UrlTest extends \PHPUnit\Framework\TestCase
 {
     public function testProdUrl()

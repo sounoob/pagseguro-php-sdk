@@ -1,7 +1,4 @@
 <?php
-include 'vendor/autoload.php';
-
-
 class PaymentTest extends \PHPUnit\Framework\TestCase
 {
     public function testPhone()
