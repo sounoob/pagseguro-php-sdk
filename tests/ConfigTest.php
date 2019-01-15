@@ -1,5 +1,5 @@
 <?php
-include '../vendor/autoload.php';
+include 'vendor/autoload.php';
 
 class ConfigTest extends \PHPUnit\Framework\TestCase
 {

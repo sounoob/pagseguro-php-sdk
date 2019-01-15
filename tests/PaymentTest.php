@@ -1,5 +1,5 @@
 <?php
-include '../vendor/autoload.php';
+include 'vendor/autoload.php';
 
 
 class PaymentTest extends \PHPUnit\Framework\TestCase

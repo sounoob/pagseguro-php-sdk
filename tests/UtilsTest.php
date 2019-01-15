@@ -1,5 +1,5 @@
 <?php
-include '../vendor/autoload.php';
+include 'vendor/autoload.php';
 
 class UtilsTest extends \PHPUnit\Framework\TestCase
 {
@@ -12,10 +12,10 @@ class UtilsTest extends \PHPUnit\Framework\TestCase
 
     public function testCPF()
     {
-        $this->assertEquals(true, Utils::checkCPF('527.574.181-22'));
-        $this->assertEquals(true, Utils::checkCPF('20021855145'));
-        $this->assertEquals(false, Utils::checkCPF('012.345.678-91'));
-        $this->assertEquals(false, Utils::checkCPF('000.000.000-00'));
-        $this->assertEquals(false, Utils::checkCPF('00000000000'));
+        $this->assertEquals(true, \Sounoob\pagseguro\core\Utils::checkCPF('527.574.181-22'));
+        $this->assertEquals(true, \Sounoob\pagseguro\core\Utils::checkCPF('20021855145'));
+        $this->assertEquals(false, \Sounoob\pagseguro\core\Utils::checkCPF('012.345.678-91'));
+        $this->assertEquals(false, \Sounoob\pagseguro\core\Utils::checkCPF('000.000.000-00'));
+        $this->assertEquals(false, \Sounoob\pagseguro\core\Utils::checkCPF('00000000000'));
     }
 }
