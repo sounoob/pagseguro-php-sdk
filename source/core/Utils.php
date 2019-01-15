@@ -1,10 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: leode
- * Date: 22/07/2017
- * Time: 15:49
- */
+namespace Sounoob\pagseguro\core;
 
 class Utils
 {

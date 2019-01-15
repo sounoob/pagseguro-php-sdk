@@ -1,4 +1,9 @@
 <?php
+namespace Sounoob\pagseguro\core;
+
+use Sounoob\pagseguro\config\Config;
+use Exception;
+
 class Curl
 {
     private $header = array();

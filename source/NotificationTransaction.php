@@ -1,6 +1,8 @@
 <?php
+namespace Sounoob\pagseguro;
 
-include_once "core/PagSeguro.php";
+use Sounoob\pagseguro\core\PagSeguro;
+use InvalidArgumentException;
 
 class NotificationTransaction extends PagSeguro
 {

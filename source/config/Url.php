@@ -1,4 +1,5 @@
 <?php
+namespace Sounoob\pagseguro\config;
 
 /**
  * Class URL

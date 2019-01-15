@@ -1,6 +1,9 @@
 <?php
-include_once "core/PagSeguro.php";
-include_once "core/Utils.php";
+namespace Sounoob\pagseguro;
+
+use Sounoob\pagseguro\core\PagSeguro;
+use Sounoob\pagseguro\config\Config;
+
 class Plans extends PagSeguro
 {
     private $data = array();

@@ -1,7 +1,8 @@
 <?php
-include_once dirname(__FILE__) . "/../config/Config.php";
-include_once dirname(__FILE__) . "/../config/Url.php";
-include_once "Curl.php";
+namespace Sounoob\pagseguro\core;
+
+use Sounoob\pagseguro\config\Config;
+use Sounoob\pagseguro\config\URL;
 
 class PagSeguro
 {

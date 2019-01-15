@@ -1,7 +1,8 @@
 <?php
+namespace Sounoob\pagseguro;
 
-include_once "core/PagSeguro.php";
-include_once "core/Utils.php";
+use Sounoob\pagseguro\core\PagSeguro;
+use InvalidArgumentException;
 
 class TransactionDetails extends PagSeguro
 {

@@ -1,11 +1,11 @@
 <?php
-include '../source/SearchTransaction.php';
+include '../vendor/autoload.php';
 
-//Config::setProduction();
-//Config::setSandbox();
-//Config::setAccountCredentials('dev@sounoob.com.br', '5179DCD806314BD6A77B774DF6148CA9', true);
+//\Sounoob\pagseguro\config\Config::setProduction();
+//\Sounoob\pagseguro\config\Config::setSandbox();
+//\Sounoob\pagseguro\config\Config::setAccountCredentials('dev@sounoob.com.br', '5179DCD806314BD6A77B774DF6148CA9', true);
 
-$transactions = new SearchTransaction();
+$transactions = new \Sounoob\pagseguro\SearchTransaction();
 //Data inicial padrão 2017-10-15T19:11
 $transactions->setInitialDate(date("Y-m-d\TH:i", strtotime("-30 days", time())));//Opcional caso passe a referência
 //Data final padrão 2017-11-15T19:11

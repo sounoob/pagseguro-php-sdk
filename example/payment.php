@@ -1,11 +1,11 @@
 <?php
-include '../source/Payment.php';
+include '../vendor/autoload.php';
 
-//Config::setProduction();
-Config::setSandbox();
-//Config::setAccountCredentials('dev@sounoob.com.br', '5179DCD806314BD6A77B774DF6148CA9', true);
+//Sounoob\pagseguro\config\Config::setProduction();
+//Sounoob\pagseguro\config\Config::setSandbox();
+//Sounoob\pagseguro\config\Config::setAccountCredentials('dev@sounoob.com.br', '5179DCD806314BD6A77B774DF6148CA9', true);
 
-$payment = new Payment();
+$payment = new \Sounoob\pagseguro\Payment();
 $itens = array();
 $itens[] = array(
     'id' => '0001',

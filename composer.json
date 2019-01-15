@@ -1,18 +1,22 @@
 {
-    "name": "sounoob/pagseguro",
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "SouNoob",
-            "email": "OpenSource@sounoob.com.br"
-        }
-    ],
-    "require": {
-        "php": ">=5.4.45",
-        "phpunit/phpunit": "4.8.*"
-    },
-    "require-dev": {
-        "phpunit/phpunit": "4.8.*"
-    },
-    "prefer-stable": true
+	"name" : "sounoob/pagseguro-php-sdk",
+	"license" : "MIT",
+	"authors" : [{
+			"name" : "SouNoob",
+			"email" : "OpenSource@sounoob.com.br"
+		}
+	],
+	"require" : {
+		"php" : ">=5.4.45",
+		"phpunit/phpunit" : "4.8.*"
+	},
+	"require-dev" : {
+		"phpunit/phpunit" : "4.8.*"
+	},
+	"prefer-stable" : true,
+	"autoload" : {
+		"psr-4" : {
+			"Sounoob\\pagseguro\\" : "source"
+		}
+	}
 }

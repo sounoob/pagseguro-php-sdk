@@ -71,3 +71,7 @@ fabric.properties
 
 /vendor/
 composer.lock
+.buildpath
+.project
+.settings/
+composer.phar

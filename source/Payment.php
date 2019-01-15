@@ -1,7 +1,11 @@
 <?php
+namespace Sounoob\pagseguro;
 
-include_once "core/Utils.php";
-include_once "core/PagSeguro.php";
+use Sounoob\pagseguro\core\PagSeguro;
+use Sounoob\pagseguro\config\Config;
+use Sounoob\pagseguro\config\URL;
+use Sounoob\pagseguro\core\Utils;
+use Exception;
 
 class Payment extends PagSeguro
 {

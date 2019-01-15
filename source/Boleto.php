@@ -1,6 +1,11 @@
 <?php
-include_once "core/PagSeguro.php";
-include_once "core/Utils.php";
+namespace Sounoob\pagseguro;
+
+use Sounoob\pagseguro\core\PagSeguro;
+use Sounoob\pagseguro\core\Utils;
+use Sounoob\pagseguro\config\Config;
+use InvalidArgumentException;
+use Exception;
 
 class Boleto extends PagSeguro
 {
