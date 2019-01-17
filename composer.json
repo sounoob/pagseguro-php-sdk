@@ -8,7 +8,9 @@
 	],
 	"require" : {
 		"php" : ">=5.4.45",
-		"phpunit/phpunit" : "4.8.*"
+		"ext-curl": "*",
+		"lib-curl": "*",
+		"lib-openssl": "*"
 	},
 	"require-dev" : {
 		"phpunit/phpunit" : "4.8.*"
