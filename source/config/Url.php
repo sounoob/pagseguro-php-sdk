@@ -2,9 +2,9 @@
 namespace Sounoob\pagseguro\config;
 
 /**
- * Class URL
+ * Class Url
  */
-class URL
+class Url
 {
     /**
      * @return string

@@ -30,7 +30,7 @@ class PagSeguro
         $this->get['email'] = \Sounoob\pagseguro\config\Config::getEmail();
         $this->get['token'] = \Sounoob\pagseguro\config\Config::getToken();
 
-        $this->url = \Sounoob\pagseguro\config\URL::getWs() . $this->url . '?' . http_build_query($this->get);
+        $this->url = \Sounoob\pagseguro\config\Url::getWs() . $this->url . '?' . http_build_query($this->get);
 
         $this->curl->setUrl($this->url);
     }

@@ -3,7 +3,7 @@ namespace Sounoob\pagseguro;
 
 use Sounoob\pagseguro\core\PagSeguro;
 use Sounoob\pagseguro\config\Config;
-use Sounoob\pagseguro\config\URL;
+use Sounoob\pagseguro\config\Url;
 use Sounoob\pagseguro\core\Utils;
 use Exception;
 
