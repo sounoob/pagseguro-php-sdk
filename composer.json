@@ -20,5 +20,10 @@
 		"psr-4" : {
 			"Sounoob\\pagseguro\\" : "source"
 		}
+	},
+	"autoload-dev" : {
+		"psr-4" : {
+			"Sounoob\\pagseguro\\" : "tests"
+		}
 	}
 }
