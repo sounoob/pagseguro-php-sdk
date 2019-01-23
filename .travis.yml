@@ -9,6 +9,10 @@ php:
 os:
   - linux
 
+before_install:
+  - composer self-update
+  - composer install
+  
 install: composer install
 
 script: phpunit --verbose --debug
