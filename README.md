@@ -1,6 +1,8 @@
 # pagseguro-php-sdk
 [![Build Status](https://travis-ci.org/sounoob/pagseguro-php-sdk.svg?branch=master)](https://travis-ci.org/sounoob/pagseguro-php-sdk)
 [![Total Downloads](https://poser.pugx.org/sounoob/pagseguro-php-sdk/d/total.svg)](https://packagist.org/packages/sounoob/pagseguro-php-sdk)
+[![Latest Stable Version](https://poser.pugx.org/sounoob/pagseguro-php-sdk/v/stable)](https://packagist.org/packages/sounoob/pagseguro-php-sdk)
+[![License](https://poser.pugx.org/sounoob/pagseguro-php-sdk/license)](https://packagist.org/packages/sounoob/pagseguro-php-sdk)
 
 
 Uma biblioteca do PagSeguro que qualquer noob pode usar, editar, contribuir, melhorar e seja lá o que eles quiserem fazer... 
