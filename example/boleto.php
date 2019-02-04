@@ -1,11 +1,7 @@
 <?php
 include '../vendor/autoload.php';
 
-
-//\Sounoob\pagseguro\config\Config::setProduction();
-//\Sounoob\pagseguro\config\Config::setSandbox();
-//\Sounoob\pagseguro\config\Config::setAccountCredentials('dev@sounoob.com.br', '5179DCD806314BD6A77B774DF6148CA9', false);
-
+//\Sounoob\pagseguro\config\Config::setAccountCredentials('seu@email.com.br', 'BD65179DCD806314A77B774DF6148CA9');
 
 $boleto = new \Sounoob\pagseguro\Boleto();
 /*
@@ -33,7 +29,7 @@ $boleto->setFirstDueDate(date("Y-m-d", strtotime("+3 days", time())));
 //Esse é o numero de boletos a ser gerado.
 $boleto->setNumberOfPayments(2);
 //Uma referência de quem é o boleto (note que terá multiplos boletos com a mesma referência)
-$boleto->setReference('Referencia Qualquer');//**
+$boleto->setReference('boonuos');//**
 //Instruções para quem irá receber o pagamento
 $boleto->setInstructions('Aloprar o comprador se ele tentar pagar atrasado');
 //CEP do comprador

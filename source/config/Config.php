@@ -1,6 +1,8 @@
 <?php
 namespace Sounoob\pagseguro\config;
 
+use Sounoob;
+
 /**
  * Class Config
  */
@@ -13,15 +15,11 @@ class Config
     /**
      * @var string
      */
-    private static $email = 'dev@sounoob.com.br';
+    private static $email = 'seu@email.com.br';
     /**
      * @var string
      */
-    private static $tokenProduction = "ECBEA46582584EE6BFDCAF5CD3D7878A";
-    /**
-     * @var string
-     */
-    private static $tokenSandbox = "CEEE2C5274A149588A3A3F4211BE9C42";
+    private static $token = "BD65179DCD806314A77B774DF6148CA9";
 
     /**
      * @return string
@@ -36,7 +34,7 @@ class Config
      */
     public static function getToken()
     {
-        return self::isSandbox() ? self::$tokenSandbox : self::$tokenProduction;
+        return self::$token;
     }
 
     /**
@@ -48,7 +46,7 @@ class Config
     }
 
     /**
-     *
+     * @deprecated
      */
     public static function setSandbox()
     {
@@ -56,24 +54,19 @@ class Config
     }
 
     /**
-     *
+     * @deprecated
      */
     public static function setProduction()
     {
         self::$sandbox = false;
     }
 
-    public static function setAccountCredentials($email, $token, $isSandbox = true)
+    public static function setAccountCredentials($email, $token)
     {
         self::$email = $email;
-
-        if($isSandbox === true) {
-            self::setSandbox();
-            self::$tokenSandbox = $token;
-        }else{
-            self::setProduction();
-            self::$tokenProduction = $token;
-        }
+        self::$token = $token;
+        
+        \Sounoob\pagseguro\config\Discover::detect_env();
     }
 }
 
