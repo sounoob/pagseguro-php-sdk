@@ -24,7 +24,7 @@ class Discover
         try {
             $transactions = new \Sounoob\pagseguro\SearchTransaction();
             $transactions->setReference('boonuos');
-            $transactions->find();            
+            $transactions->send();            
             return true;
             
         } catch (\Exception $e) {
