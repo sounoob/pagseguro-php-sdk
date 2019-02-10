@@ -16,7 +16,7 @@ $boleto->setCustomerCPF('01234567890');//Se for CNPJ use $boleto->setCustomerCNP
 //Nome do comprador
 $boleto->setCustomerName('Noob Master');
 //Email do comprador
-$boleto->setCustomerEmail('financeiro@sounoob.com.br');
+$boleto->setCustomerEmail('email.comprador@sounoob.com.br');
 //Telefone do comprador
 $boleto->setCustomerPhone('11', '98909084');
 
