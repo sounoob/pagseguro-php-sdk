@@ -25,5 +25,10 @@
 		"psr-4" : {
 			"Sounoob\\pagseguro\\" : "tests"
 		}
-	}
+	},
+	"support": {
+		"email": "OpenSource@sounoob.com.br",
+		"issues": "https://github.com/sounoob/pagseguro-php-sdk/issues",
+		"source": "https://github.com/sounoob/pagseguro-php-sdk"
+    }
 }
