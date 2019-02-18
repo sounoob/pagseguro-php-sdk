@@ -177,7 +177,7 @@ class Plan extends PagSeguro
     public function send()
     {
         $this->url = 'pre-approvals/request';
-        $this->curl->setContentType('application/json;charset=ISO-8859-1');
+        $this->curl->setContentType('application/json;charset=UTF-8');
         $this->curl->setAccept('application/vnd.pagseguro.com.br.v3+json;charset=ISO-8859-1');
         parent::send();
         

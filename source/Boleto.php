@@ -234,8 +234,7 @@ class Boleto extends PagSeguro
             throw new Exception('API is not available in sandbox environment');
         }
         $this->url = 'recurring-payment/boletos';
-        $this->curl->setContentType('application/json;charset=ISO-8859-1');
-        $this->curl->setAccept('application/json;charset=ISO-8859-1');
+        $this->curl->setContentType('application/json;charset=UTF-8');
         return parent::send();
     }
 }

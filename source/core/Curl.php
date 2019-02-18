@@ -123,7 +123,7 @@ class Curl
         }
 
 
-        $data = curl_exec($this->curl);
+        $data = utf8_encode(curl_exec($this->curl));
         $error = curl_error($this->curl);
         /*
          * @todo log this var $error
