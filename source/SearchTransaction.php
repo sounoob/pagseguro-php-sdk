@@ -10,9 +10,7 @@ class SearchTransaction extends PagSeguro
         'v2' => 'v2/transactions/',
         'v3' => 'v3/transactions/',
     );
-    private $version = 'v3';
-    public $result = false;
-    private $filter = array();
+    private $version = null;
 
     public function __construct($version = 'v3')
     {

@@ -212,7 +212,7 @@ class Boleto extends PagSeguro
         }
     }
 
-    protected function requiredFieldsButNot()
+    protected function defaultValues()
     {
         if (!isset($this->post['periodicity'])) {
             $this->post['periodicity'] = 'monthly';

@@ -11,8 +11,7 @@ class TransactionDetails extends PagSeguro
         'v2' => 'v2/transactions/',
         'v3' => 'v3/transactions/',
     );
-    private $version = 'v3';
-    public $result = false;
+    private $version = null;
 
     public function __construct($code, $version = 'v3')
     {
@@ -27,7 +26,7 @@ class TransactionDetails extends PagSeguro
         $this->result = $this->send();
     }
 
-    public function setVersion($version)
+    private function setVersion($version)
     {
         if (!isset($this->seguiment[$version])) {
             throw new InvalidArgumentException('invalid API version: ' . $this->version);

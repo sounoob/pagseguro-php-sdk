@@ -15,15 +15,9 @@ class PagSeguro
     }
 
 
-    protected function requiredFields()
-    {
+    protected function requiredFields() {}
 
-    }
-
-    protected function requiredFieldsButNot()
-    {
-
-    }
+    protected function defaultValues() {}
 
     private function buildURL()
     {
@@ -38,7 +32,7 @@ class PagSeguro
     public function build()
     {
         $this->requiredFields();
-        $this->requiredFieldsButNot();
+        $this->defaultValues();
         $this->buildURL();
     }
     public function send()

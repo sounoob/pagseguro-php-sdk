@@ -164,7 +164,7 @@ class Plan extends PagSeguro
         }
     }
     
-    protected function requiredFieldsButNot()
+    protected function defaultValues()
     {
         if (!isset($this->post['preApproval']['charge'])) {
             $this->post['preApproval']['charge'] = 'AUTO';
