@@ -7,7 +7,17 @@ class Utils
     {
         return preg_replace('/[^0-9]/', '', $number);
     }
-
+    
+    static public function getDomainFromEmail($email)
+    {
+        $domain = explode('@', $email);
+        
+        if(count($domain) != 2) {
+            return false;
+        }
+        return end($domain);
+    }
+    
     static public function checkCPF($cpf = null)
     {
         if (empty($cpf)) {
