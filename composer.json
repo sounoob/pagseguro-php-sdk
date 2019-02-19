@@ -1,6 +1,6 @@
 {
 	"name" : "sounoob/pagseguro-php-sdk",
-	"license" : "MIT",
+	"license" : "Apache-2.0",
 	"authors" : [{
 			"name" : "SouNoob",
 			"email" : "OpenSource@sounoob.com.br"
