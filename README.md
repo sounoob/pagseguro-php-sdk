@@ -1,4 +1,4 @@
-# pagseguro-php-sdk
+# Biblioteca de integração PagSeguro para PHP
 [![Build Status](https://travis-ci.org/sounoob/pagseguro-php-sdk.svg?branch=master)](https://travis-ci.org/sounoob/pagseguro-php-sdk)
 [![Total Downloads](https://poser.pugx.org/sounoob/pagseguro-php-sdk/d/total.svg)](https://packagist.org/packages/sounoob/pagseguro-php-sdk)
 [![Latest Stable Version](https://poser.pugx.org/sounoob/pagseguro-php-sdk/v/stable)](https://packagist.org/packages/sounoob/pagseguro-php-sdk)
@@ -13,7 +13,7 @@ Aqui seu pull request é bem-vindo, desde que mantenha a ideia inicial da API, m
 
 O SDK oficial é lindo, mas é difícil de editar os arquivos, quem não manja de PHP pode ficar perdido. A nossa, usaremos a simplicidade, não precisa ser rápido nem lindo, só precisa funcionar e estar bem atualizado o resto vamos refratorando...
 
-##Instalação
+## Instalação
 > Nota: Recomendamos a instalação via **Composer**. Você também pode baixar o repositório como [arquivo zip] ou fazer um clone via Git.
  
 ### Instalação via Composer
