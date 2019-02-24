@@ -35,9 +35,7 @@ $boleto->setInstructions('Aloprar o comprador se ele tentar pagar atrasado');
 //CEP do comprador
 $boleto->setCustomerAddressPostalCode('01230000');
 //Endereço do comprador
-$boleto->setCustomerAddressStreet('Av Faria lima');
-//Numero da casa do comprador
-$boleto->setCustomerAddressNumber('103 A');
+$boleto->setCustomerAddress('Av Faria lima', '103 A');
 //Bairro do comprador
 $boleto->setCustomerAddressDistrict('Vila Olimpia');
 //Cidade do comprador

@@ -3,11 +3,13 @@ namespace Sounoob\pagseguro\config;
 
 /**
  * Class Url
+ * @package Sounoob\pagseguro\config
  */
 class Url
 {
     /**
      * @return string
+     * @throws \Exception
      */
     public static function getWs()
     {
@@ -16,6 +18,7 @@ class Url
 
     /**
      * @return string
+     * @throws \Exception
      */
     public static function getPage()
     {
@@ -24,6 +27,7 @@ class Url
 
     /**
      * @return string
+     * @throws \Exception
      */
     public static function getStc()
     {

@@ -1,8 +1,10 @@
 <?php
+
 namespace Sounoob\pagseguro\config;
 
 /**
  * Class Config
+ * @package Sounoob\pagseguro\config
  */
 class Config
 {
@@ -37,11 +39,12 @@ class Config
 
     /**
      * @return bool
+     * @throws \Exception
      */
     public static function isSandbox()
     {
-        if(self::$sandbox === null) {            
-            \Sounoob\pagseguro\config\Discover::detect_env();
+        if (self::$sandbox === null) {
+            Discover::detect_env();
         }
         return self::$sandbox;
     }
@@ -62,10 +65,14 @@ class Config
         self::$sandbox = false;
     }
 
+    /**
+     * @param string $email
+     * @param string $token
+     */
     public static function setAccountCredentials($email, $token)
     {
-        if(self::$sandbox !== null) {
-            throw new \InvalidArgumentException('The e-mail and token was already defined before');            
+        if (self::$sandbox !== null) {
+            throw new \InvalidArgumentException('The e-mail and token was already defined before');
         }
         self::$email = $email;
         self::$token = $token;

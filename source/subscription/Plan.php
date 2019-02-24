@@ -1,143 +1,243 @@
 <?php
+
 namespace Sounoob\pagseguro\subscription;
 
+use Sounoob\pagseguro\config\Url;
 use Sounoob\pagseguro\core\PagSeguro;
+use Sounoob\pagseguro\core\Utils;
 
+/**
+ * Class Plan
+ * @package Sounoob\pagseguro\subscription
+ */
 class Plan extends PagSeguro
 {
-    public function setReceiverEmail($data)
+    /**
+     * @param string $email
+     */
+    public function setReceiverEmail($email)
     {
-        $this->post['preApproval']['receiver']['email'] = $data;
+        $this->post['preApproval']['receiver']['email'] = $email;
     }
-    public function setReviewURL($data)
+
+    /**
+     * @param string $url
+     */
+    public function setReviewURL($url)
     {
-        $this->post['reviewURL'] = $data;
+        $this->post['reviewURL'] = $url;
     }
-    public function setMaxUses($data)
+
+    /**
+     * @param string $maxUses
+     */
+    public function setMaxUses($maxUses)
     {
-        $this->post['maxUses'] = $data;
+        $this->post['maxUses'] = $maxUses;
     }
-    public function setRedirectURL($data)
+
+    /**
+     * @param string $url
+     */
+    public function setRedirectURL($url)
     {
-        $this->post['redirectURL'] = $data;
+        $this->post['redirectURL'] = $url;
     }
-    public function setReference($data)
+
+    /**
+     * @param string $reference
+     */
+    public function setReference($reference)
     {
-        $this->post['reference'] = $data;
+        $this->post['reference'] = $reference;
     }
-    public function setName($data)
+
+    /**
+     * @param string $name
+     */
+    public function setName($name)
     {
-        $this->post['preApproval']['name'] = $data;
+        $this->post['preApproval']['name'] = $name;
     }
+
     public function setChargeManual()
     {
         $this->post['preApproval']['charge'] = 'MANUAL';
     }
+
     public function setChargeAuto()
     {
         $this->post['preApproval']['charge'] = 'AUTO';
     }
-    public function setAmountPerPayment($data)
+
+    /**
+     * @param double $amountPerPayment
+     */
+    public function setAmountPerPayment($amountPerPayment)
     {
-        if ($data < 1 || $data > 1000000) {
+        if ($amountPerPayment < 1 || $amountPerPayment > 1000000) {
             //PagSeguro error code 11064
-            throw new \InvalidArgumentException('preApprovalAmountPerPayment out of range: ' . $data);
+            throw new \InvalidArgumentException('preApprovalAmountPerPayment out of range: ' . $amountPerPayment);
         }
-        $this->post['preApproval']['amountPerPayment'] = $data;
+        $this->post['preApproval']['amountPerPayment'] = $amountPerPayment;
     }
-    public function setTrialPeriodDuration($data)
+
+    /**
+     * @param int $trialPeriodDuration
+     */
+    public function setTrialPeriodDuration($trialPeriodDuration)
     {
-        $data = \Sounoob\pagseguro\core\Utils::onlyNumbers($data);
-        
-        if ($data <= 0 || $data > 1000000) {
+        $trialPeriodDuration = Utils::onlyNumbers($trialPeriodDuration);
+
+        if ($trialPeriodDuration <= 0 || $trialPeriodDuration > 1000000) {
             //PagSeguro error code 11058
             throw new \InvalidArgumentException('Trial period duration is invalid.');
         }
-        $this->post['preApproval']['trialPeriodDuration'] = $data;
+        $this->post['preApproval']['trialPeriodDuration'] = $trialPeriodDuration;
     }
-    public function setDetails($data)
+
+    /**
+     * @param string $details
+     */
+    public function setDetails($details)
     {
-        if (strlen($data) > 255) {
+        if (strlen($details) > 255) {
             //PagSeguro error code 11064
-            throw new \InvalidArgumentException('preApprovalDetails invalid length: ' . $data);
+            throw new \InvalidArgumentException('preApprovalDetails invalid length: ' . $details);
         }
-        $this->post['preApproval']['details'] = $data;
+        $this->post['preApproval']['details'] = $details;
     }
-    public function setMembershipFee($data)
+
+    /**
+     * @param double $membershipFee
+     */
+    public function setMembershipFee($membershipFee)
     {
-        if ($data <= 0 || $data > 1000000) {
+        if ($membershipFee <= 0 || $membershipFee > 1000000) {
             //PagSeguro error code 17076
             throw new \InvalidArgumentException('Membership fee is invalid.');
         }
-        $this->post['preApproval']['membershipFee'] = $data;
+        $this->post['preApproval']['membershipFee'] = $membershipFee;
     }
-    public function setMaxAmountPerPeriod($data)
+
+    /**
+     * @param double $maxAmountPerPeriod
+     */
+    public function setMaxAmountPerPeriod($maxAmountPerPeriod)
     {
-        $this->post['preApproval']['maxAmountPerPeriod'] = $data;
-    }    
-    public function setMaxAmountPerPayment($data)
-    {
-        $this->post['preApproval']['maxAmountPerPayment'] = $data;
+        $this->post['preApproval']['maxAmountPerPeriod'] = $maxAmountPerPeriod;
     }
-    public function setMaxTotalAmount($data)
+
+    /**
+     * @param double $maxAmountPerPayment
+     */
+    public function setMaxAmountPerPayment($maxAmountPerPayment)
     {
-        $this->post['preApproval']['maxTotalAmount'] = $data;
+        $this->post['preApproval']['maxAmountPerPayment'] = $maxAmountPerPayment;
     }
-    public function setMaxPaymentsPerPeriod($data)
+
+    /**
+     * @param double $maxTotalAmount
+     */
+    public function setMaxTotalAmount($maxTotalAmount)
     {
-        $this->post['preApproval']['maxPaymentsPerPeriod'] = $data;
+        $this->post['preApproval']['maxTotalAmount'] = $maxTotalAmount;
     }
-    public function setInitialDate($data)
+
+    /**
+     * @param double $maxPaymentsPerPeriod
+     */
+    public function setMaxPaymentsPerPeriod($maxPaymentsPerPeriod)
     {
-        $this->post['preApproval']['initialDate'] = $data;
+        $this->post['preApproval']['maxPaymentsPerPeriod'] = $maxPaymentsPerPeriod;
     }
-    public function setFinalDate($data)
+
+    /**
+     * @param string $initialDate
+     */
+    public function setInitialDate($initialDate)
     {
-        $this->post['preApproval']['finalDate'] = $data;
+        $this->post['preApproval']['initialDate'] = $initialDate;
     }
-    public function setDayOfYear($data)
+
+    /**
+     * @param string $finalDate
+     */
+    public function setFinalDate($finalDate)
     {
-        $this->post['preApproval']['dayOfYear'] = $data;
+        $this->post['preApproval']['finalDate'] = $finalDate;
     }
-    public function setDayOfMonth($data)
+
+    /**
+     * @param int $dayOfYear
+     */
+    public function setDayOfYear($dayOfYear)
     {
-        $this->post['preApproval']['dayOfMonth'] = $data;
+        $this->post['preApproval']['dayOfYear'] = $dayOfYear;
     }
-    public function setDayOfWeek($data)
+
+    /**
+     * @param int $dayOfMonth
+     */
+    public function setDayOfMonth($dayOfMonth)
     {
-        $this->post['preApproval']['dayOfWeek'] = $data;
+        $this->post['preApproval']['dayOfMonth'] = $dayOfMonth;
     }
-    public function setCancelURL($data)
+
+    /**
+     * @param int $dayOfWeek
+     */
+    public function setDayOfWeek($dayOfWeek)
     {
-        $this->post['preApproval']['cancelURL'] = $data;
+        $this->post['preApproval']['dayOfWeek'] = $dayOfWeek;
     }
+
+    /**
+     * @param string $url
+     */
+    public function setCancelURL($url)
+    {
+        $this->post['preApproval']['cancelURL'] = $url;
+    }
+
     public function setPeriodWeekly()
     {
         $this->post['preApproval']['period'] = 'WEEKLY';
     }
+
     public function setPeriodMonthly()
     {
         $this->post['preApproval']['period'] = 'MONTHLY';
     }
+
     public function setPeriodBimonthly()
     {
         $this->post['preApproval']['period'] = 'BIMONTHLY';
     }
+
     public function setPeriodTrimonthly()
     {
         $this->post['preApproval']['period'] = 'TRIMONTHLY';
     }
+
     public function setPeriodSemiannually()
     {
         $this->post['preApproval']['period'] = 'SEMIANNUALLY';
     }
+
     public function setPeriodYearly()
     {
         $this->post['preApproval']['period'] = 'YEARLY';
     }
+
+    /**
+     * @param string $unit
+     * @param int $value
+     * @throws \Exception
+     */
     public function setExpiration($unit, $value)
     {
-        if(!in_array($unit, array(
+        if (!in_array($unit, array(
             'YEARS',
             'MONTHS',
             'DAYS',
@@ -152,18 +252,21 @@ class Plan extends PagSeguro
         $this->post['preApproval']['expiration']['unit'] = $unit;
         $this->post['preApproval']['expiration']['value'] = $value;
     }
-    
+
+    /**
+     * @throws \Exception
+     */
     protected function requiredFields()
-    {   
-        if(!isset($this->post['preApproval']['charge']) || $this->post['preApproval']['charge'] == 'AUTO') {
-            
+    {
+        if (!isset($this->post['preApproval']['charge']) || $this->post['preApproval']['charge'] == 'AUTO') {
+
             if (!isset($this->post['preApproval']['amountPerPayment']) || !isset($this->post['preApproval']['period'])) {
                 //PagSeguro error code 11110
                 throw new \Exception('in preApproval auto charged the following parameters are required: amountPerPayment and period');
             }
         }
     }
-    
+
     protected function defaultValues()
     {
         if (!isset($this->post['preApproval']['charge'])) {
@@ -173,14 +276,18 @@ class Plan extends PagSeguro
             $this->post['preApproval']['name'] = $this->post['preApproval']['charge'] . ' - ' . ($this->post['preApproval']['period'] ? $this->post['preApproval']['period'] : NULL);
         }
     }
-    
+
+    /**
+     * @return \SimpleXMLElement|\stdClass
+     * @throws \Exception
+     */
     public function send()
     {
         $this->url = 'pre-approvals/request';
         $this->curl->setContentType('application/json;charset=UTF-8');
         $this->curl->setAccept('application/vnd.pagseguro.com.br.v3+json;charset=ISO-8859-1');
         parent::send();
-        
-        $this->link = isset($this->result->code) ? \Sounoob\pagseguro\config\Url::getPage() . 'pre-approvals/request.html?code=' . $this->result->code : null;
+
+        $this->link = isset($this->result->code) ? Url::getPage() . 'pre-approvals/request.html?code=' . $this->result->code : null;
     }
 }

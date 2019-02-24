@@ -1,13 +1,25 @@
 <?php
 namespace Sounoob\pagseguro\core;
 
+/**
+ * Class Utils
+ * @package Sounoob\pagseguro\core
+ */
 class Utils
 {
+    /**
+     * @param $number
+     * @return string|string[]|null
+     */
     static public function onlyNumbers($number)
     {
         return preg_replace('/[^0-9]/', '', $number);
     }
-    
+
+    /**
+     * @param $email
+     * @return bool|mixed
+     */
     static public function getDomainFromEmail($email)
     {
         $domain = explode('@', $email);
@@ -17,7 +29,11 @@ class Utils
         }
         return end($domain);
     }
-    
+
+    /**
+     * @param null $cpf
+     * @return bool
+     */
     static public function checkCPF($cpf = null)
     {
         if (empty($cpf)) {

@@ -1,16 +1,32 @@
 <?php
+
 namespace Sounoob\pagseguro;
 
 use Sounoob\pagseguro\core\PagSeguro;
 
+/**
+ * Class Session
+ * @package Sounoob\pagseguro
+ */
 class Session extends PagSeguro
 {
+    /**
+     * @var array
+     */
     private $seguiment = array(
         'v1' => 'sessions/',
         'v2' => 'v2/sessions/',
     );
-    private $version = null;
-    
+    /**
+     * @var string
+     */
+    private $version = '';
+
+    /**
+     * Session constructor.
+     * @param string $version
+     * @throws \Exception
+     */
     public function __construct($version = 'v2')
     {
         parent::__construct();
@@ -18,6 +34,10 @@ class Session extends PagSeguro
         $this->curl->setCustomRequest('POST');
         $this->result = $this->send();
     }
+
+    /**
+     * @param string $version
+     */
     private function setVersion($version)
     {
         if (!isset($this->seguiment[$version])) {
@@ -25,6 +45,11 @@ class Session extends PagSeguro
         }
         $this->version = $version;
     }
+
+    /**
+     * @return \SimpleXMLElement|\stdClass
+     * @throws \Exception
+     */
     public function send()
     {
         $this->url = $this->seguiment[$this->version];

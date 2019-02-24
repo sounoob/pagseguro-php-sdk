@@ -1,147 +1,251 @@
 <?php
+
 namespace Sounoob\pagseguro\subscription;
 
 use Sounoob\pagseguro\core\PagSeguro;
+use Sounoob\pagseguro\core\Utils;
 
+/**
+ * Class Accession
+ * @package Sounoob\pagseguro\subscription
+ */
 class Accession extends PagSeguro
 {
-    public function setPlan($data)
+    /**
+     * @param string $plan
+     */
+    public function setPlan($plan)
     {
-        $this->post['plan'] = $data;
+        $this->post['plan'] = $plan;
     }
-    public function setReference($data)
+
+    /**
+     * @param string $reference
+     */
+    public function setReference($reference)
     {
-        $this->post['reference'] = $data;
+        $this->post['reference'] = $reference;
     }
-    public function setSenderName($data)
+
+    /**
+     * @param string $name
+     */
+    public function setSenderName($name)
     {
-        $this->post['sender']['name'] = $data;
+        $this->post['sender']['name'] = $name;
     }
-    public function setSenderEmail($data)
+
+    /**
+     * @param string $email
+     * @throws \Exception
+     */
+    public function setSenderEmail($email)
     {
-        $domain = \Sounoob\pagseguro\core\Utils::getDomainFromEmail($data);
+        $domain = Utils::getDomainFromEmail($email);
         if ($domain === false || ($domain != 'sandbox.pagseguro.com.br' && \Sounoob\pagseguro\config\Config::isSandbox() === true)) {
             //PagSeguro error code 60800
-            throw new \InvalidArgumentException('sender email invalid domain: ' . $data . '. You must use an email @sandbox.pagseguro.com.br');
+            throw new \InvalidArgumentException('sender email invalid domain: ' . $email . '. You must use an email @sandbox.pagseguro.com.br');
         }
-        $this->post['sender']['email'] = $data;
+        $this->post['sender']['email'] = $email;
     }
     /*
      * @todo create senderIP();
      */
-    public function setSenderHash($data)
+    /**
+     * @param string $senderHash
+     */
+    public function setSenderHash($senderHash)
     {
-        $this->post['sender']['hash'] = $data;
+        $this->post['sender']['hash'] = $senderHash;
     }
+
+    /**
+     * @param int $areaCode
+     * @param int $number
+     */
     public function setSenderPhone($areaCode, $number)
     {
-        $this->post['sender']['phone']['areaCode'] = \Sounoob\pagseguro\core\Utils::onlyNumbers($areaCode);
-        $this->post['sender']['phone']['number'] = \Sounoob\pagseguro\core\Utils::onlyNumbers($number);
+        $this->post['sender']['phone']['areaCode'] = Utils::onlyNumbers($areaCode);
+        $this->post['sender']['phone']['number'] = Utils::onlyNumbers($number);
     }
+
+    /**
+     * @param string $street
+     * @param string $number
+     * @param string|null $complement
+     */
     public function setSenderAddress($street, $number = 's/n', $complement = null)
     {
         $this->post['sender']['address']['street'] = $street;
-        if($number) {
+        if ($number) {
             $this->post['sender']['address']['number'] = $number;
         }
-        if($complement) {
+        if ($complement) {
             $this->post['sender']['address']['complement'] = $complement;
         }
     }
-    public function setSenderPostalCode($data)
+
+    /**
+     * @param int $postalCode
+     */
+    public function setSenderPostalCode($postalCode)
     {
-        $this->post['sender']['address']['postalCode'] = $data;
+        $postalCode = Utils::onlyNumbers($postalCode);
+        $this->post['sender']['address']['postalCode'] = $postalCode;
     }
-    public function setSenderDistrict($data)
+
+    /**
+     * @param string $district
+     */
+    public function setSenderDistrict($district)
     {
-        $this->post['sender']['address']['district'] = $data;
+        $this->post['sender']['address']['district'] = $district;
     }
-    public function setSenderCity($data)
+
+    /**
+     * @param string $city
+     */
+    public function setSenderCity($city)
     {
-        $this->post['sender']['address']['city'] = $data;
+        $this->post['sender']['address']['city'] = $city;
     }
-    public function setSenderState($data)
+
+    /**
+     * @param string $state
+     */
+    public function setSenderState($state)
     {
-        $data = strtoupper($data);
-        if (strlen($data) != 2) {
+        $state = strtoupper($state);
+        if (strlen($state) != 2) {
             //PagSeguro error code 19007
-            throw new \InvalidArgumentException('addressState invalid value: ' . $data . ', must fit the pattern: \w{2} (e. g. "SP")');
+            throw new \InvalidArgumentException('addressState invalid value: ' . $state . ', must fit the pattern: \w{2} (e. g. "SP")');
         }
-        $this->post['sender']['address']['state'] = $data;
-    }    
+        $this->post['sender']['address']['state'] = $state;
+    }
+
+    /**
+     * @param string $street
+     * @param string $number
+     * @param string|null $complement
+     */
     public function setHolderAddress($street, $number = 's/n', $complement = null)
     {
         $this->post['paymentMethod']['creditCard']['holder']['billingAddress']['street'] = $street;
-        if($number) {
+        if ($number) {
             $this->post['paymentMethod']['creditCard']['holder']['billingAddress']['number'] = $number;
         }
-        if($complement) {
+        if ($complement) {
             $this->post['paymentMethod']['creditCard']['holder']['billingAddress']['complement'] = $complement;
         }
     }
-    public function setHolderPostalCode($data)
+
+    /**
+     * @param int $postalCode
+     */
+    public function setHolderPostalCode($postalCode)
     {
-        $this->post['paymentMethod']['creditCard']['holder']['billingAddress']['postalCode'] = $data;
+        $postalCode = Utils::onlyNumbers($postalCode);
+        $this->post['paymentMethod']['creditCard']['holder']['billingAddress']['postalCode'] = $postalCode;
     }
-    public function setHolderDistrict($data)
+
+    /**
+     * @param string $district
+     */
+    public function setHolderDistrict($district)
     {
-        $this->post['paymentMethod']['creditCard']['holder']['billingAddress']['district'] = $data;
+        $this->post['paymentMethod']['creditCard']['holder']['billingAddress']['district'] = $district;
     }
-    public function setHolderCity($data)
+
+    /**
+     * @param string $city
+     */
+    public function setHolderCity($city)
     {
-        $this->post['paymentMethod']['creditCard']['holder']['billingAddress']['city'] = $data;
+        $this->post['paymentMethod']['creditCard']['holder']['billingAddress']['city'] = $city;
     }
-    public function setHolderState($data)
+
+    /**
+     * @param string $state
+     */
+    public function setHolderState($state)
     {
-        $data = strtoupper($data);
-        if (strlen($data) != 2) {
+        $state = strtoupper($state);
+        if (strlen($state) != 2) {
             //PagSeguro error code 19007
-            throw new \InvalidArgumentException('addressState invalid value: ' . $data . ', must fit the pattern: \w{2} (e. g. "SP")');
+            throw new \InvalidArgumentException('addressState invalid value: ' . $state . ', must fit the pattern: \w{2} (e. g. "SP")');
         }
-        $this->post['paymentMethod']['creditCard']['holder']['billingAddress']['state'] = $data;
+        $this->post['paymentMethod']['creditCard']['holder']['billingAddress']['state'] = $state;
     }
-     /*
-      * @todo create a setSenderCPNJ
-      */
-    public function setSenderCPF($data)
+    /*
+     * @todo create a setSenderCPNJ
+     */
+    /**
+     * @param int $cpf
+     */
+    public function setSenderCPF($cpf)
     {
-        $data = \Sounoob\pagseguro\core\Utils::onlyNumbers($data);
-        
-        if (!\Sounoob\pagseguro\core\Utils::checkCPF($data)) {
+        $cpf = Utils::onlyNumbers($cpf);
+
+        if (!Utils::checkCPF($cpf)) {
             //PagSeguro error code 61011
-            throw new \InvalidArgumentException('cpf is invalid: ' . $data);
+            throw new \InvalidArgumentException('cpf is invalid: ' . $cpf);
         }
         $this->post['sender']['documents'][0]['type'] = 'CPF';
-        $this->post['sender']['documents'][0]['value'] = $data;
+        $this->post['sender']['documents'][0]['value'] = $cpf;
     }
-    public function setCreditCardToken($data)
+
+    /**
+     * @param string $creditCardToken
+     */
+    public function setCreditCardToken($creditCardToken)
     {
-        $this->post['paymentMethod']['creditCard']['token'] = $data;
+        $this->post['paymentMethod']['creditCard']['token'] = $creditCardToken;
     }
-    public function setHolderName($data)
+
+    /**
+     * @param string $name
+     */
+    public function setHolderName($name)
     {
-        $this->post['paymentMethod']['creditCard']['holder']['name'] = $data;
+        $this->post['paymentMethod']['creditCard']['holder']['name'] = $name;
     }
-    public function setHolderBirthDate($data)
+
+    /**
+     * @param string $birthdate
+     */
+    public function setHolderBirthDate($birthdate)
     {
-        $this->post['paymentMethod']['creditCard']['holder']['birthDate'] = $data;
+        $this->post['paymentMethod']['creditCard']['holder']['birthDate'] = $birthdate;
     }
-    public function setHolderCPF($data)
+
+    /**
+     * @param int $cpf
+     */
+    public function setHolderCPF($cpf)
     {
-        $data = \Sounoob\pagseguro\core\Utils::onlyNumbers($data);
-        
-        if (!\Sounoob\pagseguro\core\Utils::checkCPF($data)) {
+        $cpf = Utils::onlyNumbers($cpf);
+
+        if (!Utils::checkCPF($cpf)) {
             //PagSeguro error code 61011
-            throw new \InvalidArgumentException('cpf is invalid: ' . $data);
+            throw new \InvalidArgumentException('cpf is invalid: ' . $cpf);
         }
         $this->post['paymentMethod']['creditCard']['holder']['documents'][0]['type'] = 'CPF';
-        $this->post['paymentMethod']['creditCard']['holder']['documents'][0]['value'] = $data;
+        $this->post['paymentMethod']['creditCard']['holder']['documents'][0]['value'] = $cpf;
     }
+
+    /**
+     * @param int $areaCode
+     * @param int $number
+     */
     public function setHolderPhone($areaCode, $number)
     {
-        $this->post['paymentMethod']['creditCard']['holder']['phone']['areaCode'] = \Sounoob\pagseguro\core\Utils::onlyNumbers($areaCode);
-        $this->post['paymentMethod']['creditCard']['holder']['phone']['number'] = \Sounoob\pagseguro\core\Utils::onlyNumbers($number);
+        $this->post['paymentMethod']['creditCard']['holder']['phone']['areaCode'] = Utils::onlyNumbers($areaCode);
+        $this->post['paymentMethod']['creditCard']['holder']['phone']['number'] = Utils::onlyNumbers($number);
     }
+
+    /**
+     * @throws \Exception
+     */
     protected function requiredFields()
     {
         if (!isset($this->post['plan'])) {
@@ -193,7 +297,7 @@ class Accession extends PagSeguro
             throw new \Exception('address state can not be empty.');
         }
     }
-    
+
     protected function defaultValues()
     {
         if (!isset($this->post['paymentMethod']['type'])) {
@@ -221,12 +325,16 @@ class Accession extends PagSeguro
             $this->post['paymentMethod']['creditCard']['holder']['billingAddress']['country'] = 'BRA';
         }
     }
-    
+
+    /**
+     * @return \SimpleXMLElement|\stdClass
+     * @throws \Exception
+     */
     public function send()
     {
         $this->url = 'pre-approvals';
         $this->curl->setContentType('application/json;charset=UTF-8');
         $this->curl->setAccept('application/vnd.pagseguro.com.br.v1+json;charset=ISO-8859-1');
-        parent::send();
+        return parent::send();
     }
 }

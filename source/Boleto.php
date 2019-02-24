@@ -1,60 +1,78 @@
 <?php
+
 namespace Sounoob\pagseguro;
 
 use Sounoob\pagseguro\core\PagSeguro;
 use Sounoob\pagseguro\core\Utils;
-use Sounoob\pagseguro\config\Config;
-use InvalidArgumentException;
-use Exception;
 
+/**
+ * Class Boleto
+ * @package Sounoob\pagseguro
+ */
 class Boleto extends PagSeguro
 {
-    public function setCustomerCPF($data)
+    /**
+     * @param int $cpf
+     */
+    public function setCustomerCPF($cpf)
     {
-        $data = Utils::onlyNumbers($data);
+        $cpf = Utils::onlyNumbers($cpf);
 
-        if (!Utils::checkCPF($data)) {
+        if (!Utils::checkCPF($cpf)) {
             //PagSeguro error code 1114
-            throw new InvalidArgumentException('customer document value is invalid. it must be a valid CPF: ' . $data);
+            throw new \InvalidArgumentException('customer document value is invalid. it must be a valid CPF: ' . $cpf);
         }
         $this->post['customer']['document']['type'] = 'CPF';
-        $this->post['customer']['document']['value'] = $data;
+        $this->post['customer']['document']['value'] = $cpf;
     }
 
-    public function setCustomerCNPJ($data)
+    /**
+     * @param int $cnpj
+     */
+    public function setCustomerCNPJ($cnpj)
     {
-        $data = Utils::onlyNumbers($data);
+        $cnpj = Utils::onlyNumbers($cnpj);
 
-        if (strlen($data) !== 14) {
+        if (strlen($cnpj) !== 14) {
             //PagSeguro error code 1115
-            throw new InvalidArgumentException('customer document value is invalid. it must be a valid CNPJ: ' . $data);
+            throw new \InvalidArgumentException('customer document value is invalid. it must be a valid CNPJ: ' . $cnpj);
         }
         $this->post['customer']['document']['type'] = 'CNPJ';
-        $this->post['customer']['document']['value'] = $data;
+        $this->post['customer']['document']['value'] = $cnpj;
     }
 
-    public function setCustomerName($data)
+    /**
+     * @param string $name
+     */
+    public function setCustomerName($name)
     {
-        if (strlen($data) > 50) {
+        if (strlen($name) > 50) {
             //PagSeguro error code 1121
-            throw new InvalidArgumentException('name size is invalid. the maximum size is 50 characters: ' . $data);
+            throw new \InvalidArgumentException('name size is invalid. the maximum size is 50 characters: ' . $name);
         }
-        $this->post['customer']['name'] = $data;
+        $this->post['customer']['name'] = $name;
     }
 
-    public function setCustomerEmail($data)
+    /**
+     * @param string $email
+     */
+    public function setCustomerEmail($email)
     {
-        if (!filter_var($data, FILTER_VALIDATE_EMAIL)) {
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             //PagSeguro error code 1132
-            throw new InvalidArgumentException('email is invalid. it must be a valid format e-mail: ' . $data);
+            throw new \InvalidArgumentException('email is invalid. it must be a valid format e-mail: ' . $email);
         }
-        if (strlen($data) > 60) {
+        if (strlen($email) > 60) {
             //PagSeguro error code 1131
-            throw new InvalidArgumentException('email size is invalid. the maximum size is 60 characters: ' . $data);
+            throw new \InvalidArgumentException('email size is invalid. the maximum size is 60 characters: ' . $email);
         }
-        $this->post['customer']['email'] = $data;
+        $this->post['customer']['email'] = $email;
     }
 
+    /**
+     * @param int $areaCode
+     * @param int $number
+     */
     public function setCustomerPhone($areaCode, $number)
     {
         $areaCode = Utils::onlyNumbers($areaCode);
@@ -65,117 +83,170 @@ class Boleto extends PagSeguro
 
         if (strlen($areaCode) !== 2) {
             //PagSeguro error code 1151
-            throw new InvalidArgumentException('phone areaCode is invalid. it must be 2 digits: ' . $areaCode);
+            throw new \InvalidArgumentException('phone areaCode is invalid. it must be 2 digits: ' . $areaCode);
         }
 
         if (strlen($number) < 8 || strlen($number) > 9) {
             //PagSeguro error code 1161
-            throw new InvalidArgumentException('phone number is invalid. it must be 8 or 9 digits without separator: ' . $number);
+            throw new \InvalidArgumentException('phone number is invalid. it must be 8 or 9 digits without separator: ' . $number);
         }
 
         $this->post['customer']['phone']['areaCode'] = $areaCode;
         $this->post['customer']['phone']['number'] = $number;
     }
 
-    public function setReference($data)
+    /**
+     * @param string $reference
+     */
+    public function setReference($reference)
     {
-        if (strlen($data) > 200) {
+        if (strlen($reference) > 200) {
             //PagSeguro error code 1001
-            throw new InvalidArgumentException('maximum reference size is 200: ' . $data);
+            throw new \InvalidArgumentException('maximum reference size is 200: ' . $reference);
         }
-        $this->post['reference'] = $data;
+        $this->post['reference'] = $reference;
     }
 
-    public function setFirstDueDate($data)
+    /**
+     * @param string $firstDueDate
+     */
+    public function setFirstDueDate($firstDueDate)
     {
-        $this->post['firstDueDate'] = $data;
+        $this->post['firstDueDate'] = $firstDueDate;
     }
 
-    public function setNumberOfPayments($data)
+    /**
+     * @param int $numberOfPayments
+     */
+    public function setNumberOfPayments($numberOfPayments)
     {
-        $data = Utils::onlyNumbers($data);
+        $numberOfPayments = Utils::onlyNumbers($numberOfPayments);
 
-        if ($data < 1 || $data > 12) {
+        if ($numberOfPayments < 1 || $numberOfPayments > 12) {
             //PagSeguro error code 1021
-            throw new InvalidArgumentException('numberOfPayments is invalid. it must have only numbers (0-9) and value between 1 to 12.: ' . $data);
+            throw new \InvalidArgumentException('numberOfPayments is invalid. it must have only numbers (0-9) and value between 1 to 12.: ' . $numberOfPayments);
         }
-        $this->post['numberOfPayments'] = $data;
+        $this->post['numberOfPayments'] = $numberOfPayments;
     }
 
-    public function setAmount($data)
+    /**
+     * @param double $amount
+     */
+    public function setAmount($amount)
     {
-        $data = (double)$data;
-        if ($data < 5 || $data > 1000000) {
+        $amount = (double)$amount;
+        if ($amount < 5 || $amount > 1000000) {
             //PagSeguro error code 1041
-            throw new InvalidArgumentException('amount is invalid. it is allowed value between 5.00 to 1000000.00.: ' . $data);
+            throw new \InvalidArgumentException('amount is invalid. it is allowed value between 5.00 to 1000000.00.: ' . $amount);
         }
-        $this->post['amount'] = $data;
+        $this->post['amount'] = $amount;
     }
 
-    public function setDescription($data)
+    /**
+     * @param string $description
+     */
+    public function setDescription($description)
     {
-        if (strlen($data) > 100) {
+        if (strlen($description) > 100) {
             //PagSeguro error code 1061
-            throw new InvalidArgumentException('description is invalid. the maximum size is 100 characters: ' . $data);
+            throw new \InvalidArgumentException('description is invalid. the maximum size is 100 characters: ' . $description);
         }
-        $this->post['description'] = $data;
+        $this->post['description'] = $description;
     }
 
-    public function setInstructions($data)
+    /**
+     * @param string $instructions
+     */
+    public function setInstructions($instructions)
     {
-        if (strlen($data) > 100) {
+        if (strlen($instructions) > 100) {
             //PagSeguro error code 1050
-            throw new InvalidArgumentException('instructions is invalid. the maximum size is 100 characters: ' . $data);
+            throw new \InvalidArgumentException('instructions is invalid. the maximum size is 100 characters: ' . $instructions);
         }
-        $this->post['instructions'] = $data;
+        $this->post['instructions'] = $instructions;
     }
 
-    public function setNotificationURL($data)
+    /**
+     * @param string $url
+     */
+    public function setNotificationURL($url)
     {
-        if (strlen($data) > 255 || !filter_var($data, FILTER_VALIDATE_URL)) {
+        if (strlen($url) > 255 || !filter_var($url, FILTER_VALIDATE_URL)) {
             //PagSeguro error code 1070
             //erro 500 when dont use http and is close to maximum size
-            throw new InvalidArgumentException('notificarionURL is invalid. the maximum size is 255 characters and should be a valid url ' . $data);
+            throw new \InvalidArgumentException('notificarionURL is invalid. the maximum size is 255 characters and should be a valid url ' . $url);
         }
-        $this->post['notificationURL'] = $data;
+        $this->post['notificationURL'] = $url;
     }
     /*
      * @todo check address erros.
      */
-    public function setCustomerAddressStreet($data)
+    /**
+     * @param string $street
+     * @deprecated
+     */
+    public function setCustomerAddressStreet($string)
     {
-        $this->post['customer']['address']['street'] = $data;
+        $this->post['customer']['address']['street'] = $string;
     }
 
-    public function setCustomerAddressNumber($data)
+    /**
+     * @param string $number
+     * @deprecated
+     */
+    public function setCustomerAddressNumber($number)
     {
-        $this->post['customer']['address']['number'] = $data;
+        $this->post['customer']['address']['number'] = $number;
     }
 
-    public function setCustomerAddressDistrict($data)
+    /**
+     * @param string $street
+     * @param string $number
+     */
+    public function setCustomerAddress($street, $number = 's\n')
     {
-        $this->post['customer']['address']['district'] = $data;
+        $this->post['customer']['address']['street'] = $street;
+        $this->post['customer']['address']['number'] = $number;
     }
 
-    public function setCustomerAddressPostalCode($data)
+    /**
+     * @param string $district
+     */
+    public function setCustomerAddressDistrict($district)
     {
-        $data = Utils::onlyNumbers($data);
-        $this->post['customer']['address']['postalCode'] = $data;
+        $this->post['customer']['address']['district'] = $district;
     }
 
-    public function setCustomerAddressCity($data)
+    /**
+     * @param int $postalCode
+     */
+    public function setCustomerAddressPostalCode($postalCode)
     {
-        $this->post['customer']['address']['city'] = $data;
+        $postalCode = Utils::onlyNumbers($postalCode);
+        $this->post['customer']['address']['postalCode'] = $postalCode;
     }
 
-    public function setCustomerAddressState($data)
+    /**
+     * @param string $city
+     */
+    public function setCustomerAddressCity($city)
     {
-        $data = strtoupper($data);
-        if (strlen($data) === 2) {
-            $this->post['customer']['address']['state'] = $data;
+        $this->post['customer']['address']['city'] = $city;
+    }
+
+    /**
+     * @param string $state
+     */
+    public function setCustomerAddressState($state)
+    {
+        /*
+         * @todo throw exeption if is not 2 char
+         */
+        $state = strtoupper($state);
+        if (strlen($state) === 2) {
+            $this->post['customer']['address']['state'] = $state;
         }
     }
-
     protected function requiredFields()
     {
         if (!isset($this->post['amount'])) {
@@ -211,7 +282,6 @@ class Boleto extends PagSeguro
             throw new Exception('customer phone is required');
         }
     }
-
     protected function defaultValues()
     {
         if (!isset($this->post['periodicity'])) {
@@ -228,6 +298,10 @@ class Boleto extends PagSeguro
         }
     }
 
+    /**
+     * @return \SimpleXMLElement|\stdClass
+     * @throws \Exception
+     */
     public function send()
     {
         if (Config::isSandbox()) {
