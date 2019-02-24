@@ -46,6 +46,7 @@ O SDK oficial é lindo, mas é difícil de editar os arquivos, quem não manja d
  - Baixe o repositório como [arquivo zip] ou faça um clone;
  - Descompacte os arquivos em seu computador;
  - Renomei a pasta `vendor_alt` para `vendor`
+ - Baixe o *[projeto core](https://github.com/sounoob/pagseguro-php-sdk-core)* e copie o conteúdo da pasta source para dentro da nossa pasta source.  
  
  Como usar
  ---------

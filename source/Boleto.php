@@ -2,6 +2,7 @@
 
 namespace Sounoob\pagseguro;
 
+use Sounoob\pagseguro\config\Config;
 use Sounoob\pagseguro\core\PagSeguro;
 use Sounoob\pagseguro\core\Utils;
 
@@ -305,7 +306,7 @@ class Boleto extends PagSeguro
     public function send()
     {
         if (Config::isSandbox()) {
-            throw new Exception('API is not available in sandbox environment');
+            throw new \Exception('API is not available in sandbox environment');
         }
         $this->url = 'recurring-payment/boletos';
         $this->curl->setContentType('application/json;charset=UTF-8');
