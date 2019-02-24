@@ -1,6 +1,12 @@
 <?php
 class PaymentTest extends \PHPUnit\Framework\TestCase
 {
+    protected function setUp()
+    {
+        parent::setUp();
+        \Sounoob\pagseguro\config\Config::setProduction();
+    }
+
     public function testPhone()
     {
         $payment = new \Sounoob\pagseguro\Payment();
