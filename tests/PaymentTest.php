@@ -1,11 +1,13 @@
 <?php
 class PaymentTest extends \PHPUnit\Framework\TestCase
 {
-    protected function setUp()
+    public function __construct($name = null, array $data = array(), $dataName = '')
     {
-        parent::setUp();
+        parent::__construct($name, $data, $dataName);
+
         \Sounoob\pagseguro\config\Config::setProduction();
     }
+
 
     public function testPhone()
     {
