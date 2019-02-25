@@ -2,7 +2,6 @@
 
 namespace Sounoob\pagseguro;
 
-use phpDocumentor\Reflection\DocBlock;
 use Sounoob\pagseguro\config\Config;
 use Sounoob\pagseguro\config\Url;
 use Sounoob\pagseguro\core\PagSeguro;
