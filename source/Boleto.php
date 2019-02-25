@@ -252,35 +252,35 @@ class Boleto extends PagSeguro
     {
         if (!isset($this->post['amount'])) {
             //PagSeguro error code 1040
-            throw new Exception('amount is required');
+            throw new \Exception('amount is required');
         }
         if (!isset($this->post['description'])) {
             //PagSeguro error code 1060
-            throw new Exception('description is required');
+            throw new \Exception('description is required');
         }
         if (!isset($this->post['customer']['document'])) {
             //PagSeguro error code 1110
-            throw new Exception('customer document is required');
+            throw new \Exception('customer document is required');
         }
         if (!isset($this->post['customer']['document']['type'])) {
             //prevents erro 500
-            throw new Exception('customer document type is required');
+            throw new \Exception('customer document type is required');
         }
         if (!isset($this->post['customer']['document']['value'])) {
             //PagSeguro error code 1113
-            throw new Exception('customer document value is required');
+            throw new \Exception('customer document value is required');
         }
         if (!isset($this->post['customer']['name'])) {
             //PagSeguro error code 1120
-            throw new Exception('name is required');
+            throw new \Exception('name is required');
         }
         if (!isset($this->post['customer']['email'])) {
             //PagSeguro error code 1130
-            throw new Exception('email is required');
+            throw new \Exception('email is required');
         }
         if (!isset($this->post['customer']['phone'])) {
             //PagSeguro error code 1140
-            throw new Exception('customer phone is required');
+            throw new \Exception('customer phone is required');
         }
     }
     protected function defaultValues()
