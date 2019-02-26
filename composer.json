@@ -8,7 +8,8 @@
 	],
 	"require" : {
 		"sounoob/pagseguro-php-sdk-core" : "*",
-		"sounoob/pagseguro-php-sdk-boleto" : "*"
+		"sounoob/pagseguro-php-sdk-boleto" : "*",
+		"sounoob/pagseguro-php-sdk-search-transaction" : "1.*"
 	},
 	"require-dev" : {
 		"phpunit/phpunit" : "4.8.*"
