@@ -1,6 +1,5 @@
 {
 	"name" : "sounoob/pagseguro-php-sdk",
-    	"type": "library",
 	"license" : "Apache-2.0",
 	"authors" : [{
 			"name" : "SouNoob",
