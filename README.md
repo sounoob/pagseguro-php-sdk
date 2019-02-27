@@ -48,7 +48,7 @@ O SDK oficial é lindo, mas é difícil de editar os arquivos, quem não manja d
  - Renomei a pasta `vendor_alt` para `vendor`
  - Baixe o *[projeto core](https://github.com/sounoob/pagseguro-php-sdk-core)* e copie o conteúdo da pasta source para dentro da nossa pasta source.  
  - Baixe o *[projeto boleto](https://github.com/sounoob/pagseguro-php-sdk-boleto)* e copie o conteúdo da pasta source para dentro da nossa pasta source.    
- - Baixe o *[projeto de busca de transacao](pagseguro-php-sdk-search-transaction)* e copie o conteúdo da pasta source para dentro da nossa pasta source.  
+ - Baixe o *[projeto de busca de transação](https://github.com/sounoob/pagseguro-php-sdk-search-transaction)* e copie o conteúdo da pasta source para dentro da nossa pasta source.  
  
  Como usar
  ---------
