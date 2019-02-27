@@ -106,8 +106,7 @@ class Payment extends PagSeguro
      */
     public function setSenderCPF($cpf)
     {
-        $cpf = Utils::onlyNumbers($cpf);
-        $cpf = substr($cpf, 0, 11);
+        $cpf = Utils::onlyNumbers($cpf, 11);
         $this->post['senderCPF'] = $cpf;
     }
 

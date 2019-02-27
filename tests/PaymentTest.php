@@ -25,7 +25,7 @@ class PaymentTest extends \PHPUnit\Framework\TestCase
     {
         $payment = new \Sounoob\pagseguro\Payment();
 
-        $payment->setSenderCPF('012.345.678-906');
+        $payment->setSenderCPF('012.345.678-90');
 
         $data = $payment->build();
 
