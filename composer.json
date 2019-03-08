@@ -1,33 +1,35 @@
 {
-	"name" : "sounoob/pagseguro-php-sdk",
-	"license" : "Apache-2.0",
-	"authors" : [{
-			"name" : "SouNoob",
-			"email" : "OpenSource@sounoob.com.br"
-		}
-	],
-	"require" : {
-		"sounoob/pagseguro-php-sdk-core" : "1.*",
-		"sounoob/pagseguro-php-sdk-boleto" : "1.*",
-		"sounoob/pagseguro-php-sdk-search-transaction" : "1.*"
-	},
-	"require-dev" : {
-		"phpunit/phpunit" : "4.8.*"
-	},
-	"prefer-stable" : true,
-	"autoload" : {
-		"psr-4" : {
-			"Sounoob\\pagseguro\\" : "source"
-		}
-	},
-	"autoload-dev" : {
-		"psr-4" : {
-			"Sounoob\\pagseguro\\" : "tests"
-		}
-	},
-	"support": {
-		"email": "OpenSource@sounoob.com.br",
-		"issues": "https://github.com/sounoob/pagseguro-php-sdk/issues",
-		"source": "https://github.com/sounoob/pagseguro-php-sdk"
+    "name": "sounoob/pagseguro-php-sdk",
+    "license": "Apache-2.0",
+    "authors": [
+        {
+            "name": "SouNoob",
+            "email": "OpenSource@sounoob.com.br"
+        }
+    ],
+    "require": {
+        "sounoob/pagseguro-php-sdk-core": "1.*",
+        "sounoob/pagseguro-php-sdk-boleto": "1.*",
+        "sounoob/pagseguro-php-sdk-search-transaction": "1.*",
+        "ext-simplexml": "*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "4.8.*"
+    },
+    "prefer-stable": true,
+    "autoload": {
+        "psr-4": {
+            "Sounoob\\pagseguro\\": "source"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Sounoob\\pagseguro\\": "tests"
+        }
+    },
+    "support": {
+        "email": "OpenSource@sounoob.com.br",
+        "issues": "https://github.com/sounoob/pagseguro-php-sdk/issues",
+        "source": "https://github.com/sounoob/pagseguro-php-sdk"
     }
 }
