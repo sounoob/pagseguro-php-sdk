@@ -16,9 +16,9 @@ class Eft extends DirectPayment
 
     protected function requiredFields()
     {
-        if (!isset($this->post['itemId1'])) {
-            //PagSeguro error code 53004
-            throw new \Exception('items invalid quantity.');
+        if (!isset($this->post['bankName'])) {
+            //PagSeguro error code 53111
+            throw new \Exception('eft bank is not accepted.');
         }
         parent::requiredFields();
     }

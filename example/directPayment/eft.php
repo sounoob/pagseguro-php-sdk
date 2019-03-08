@@ -1,7 +1,6 @@
 
 <?php
 include '../../vendor/autoload.php';
-
 //\Sounoob\pagseguro\config\Config::setAccountCredentials('seu@email.com.br', 'BD65179DCD806314A77B774DF6148CA9');
 
 $payment = new \Sounoob\pagseguro\directPayment\Eft();
@@ -15,7 +14,7 @@ $payment->addItem('2', 'Galaxy Note 10', 1, '2.01');
 $payment->addItem('3', 'iPhone XS', 1, '29387.35');
 $payment->setSenderHash('senderHashGeradoPelaLibJs');
 
-$payment->setBankItau();
+//$payment->setBankItau();
 
 
 
