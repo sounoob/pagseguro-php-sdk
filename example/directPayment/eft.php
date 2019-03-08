@@ -14,7 +14,7 @@ $payment->addItem('2', 'Galaxy Note 10', 1, '2.01');
 $payment->addItem('3', 'iPhone XS', 1, '29387.35');
 $payment->setSenderHash('senderHashGeradoPelaLibJs');
 
-//$payment->setBankItau();
+$payment->setBankItau();
 
 
 
