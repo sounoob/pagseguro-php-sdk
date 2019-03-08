@@ -2,7 +2,7 @@
 <?php
 include '../../vendor/autoload.php';
 
-\Sounoob\pagseguro\config\Config::setAccountCredentials('japle_noodles@hotmail.com', 'F6AEBAA77FF343A4ACA390E76C335511');
+//\Sounoob\pagseguro\config\Config::setAccountCredentials('seu@email.com.br', 'BD65179DCD806314A77B774DF6148CA9');
 
 $boleto = new \Sounoob\pagseguro\directPayment\Boleto();
 $boleto->setSenderName('João comprador');
