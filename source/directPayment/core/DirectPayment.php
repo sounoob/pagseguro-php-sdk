@@ -14,7 +14,7 @@ class DirectPayment extends PagSeguro
     /**
      * @var array
      */
-    private $item = array();
+    protected $item = array();
 
     /**
      * @param string $id
@@ -195,7 +195,7 @@ class DirectPayment extends PagSeguro
     /**
      *
      */
-    private function buildItem()
+    protected function buildItem()
     {
         $count = 1;
         foreach ($this->item as $item) {
