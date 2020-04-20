@@ -21,4 +21,4 @@ before_install:
   - composer self-update
   - composer install
 
-script: phpunit --verbose --debug
+script: ./vendor/bin/phpunit tests
