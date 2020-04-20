@@ -13,9 +13,6 @@
         "sounoob/pagseguro-php-sdk-search-transaction": "1.*",
         "ext-simplexml": "*"
     },
-    "require-dev": {
-        "phpunit/phpunit": "4.8.*"
-    },
     "prefer-stable": true,
     "autoload": {
         "psr-4": {
@@ -31,5 +28,8 @@
         "email": "OpenSource@sounoob.com.br",
         "issues": "https://github.com/sounoob/pagseguro-php-sdk/issues",
         "source": "https://github.com/sounoob/pagseguro-php-sdk"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9"
     }
 }
