@@ -23,7 +23,11 @@ O SDK oficial é lindo, mas é difícil de editar os arquivos, quem não manja d
 
 - Executando o comando para adicionar a dependência automaticamente
   ```
-  php composer.phar require pagseguro/pagseguro-php-sdk
+  php composer.phar require sounoob/pagseguro-php-sdk
+  ```
+  Caso tenha composer instalado direto na sua máquina
+```
+  composer require sounoob/pagseguro-php-sdk
   ```
 
 **OU**
