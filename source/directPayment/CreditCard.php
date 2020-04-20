@@ -185,6 +185,7 @@ class CreditCard extends DirectPayment
         foreach ($this->item as $item) {
             $this->post['installmentValue'] += $item['amount'] * $item['quantity'];
         }
+        $this->post['installmentValue'] = number_format($this->post['installmentValue'], 2, '.', '');
     }
 
     private function calcInstallment()
