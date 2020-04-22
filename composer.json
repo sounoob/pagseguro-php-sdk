@@ -30,6 +30,6 @@
         "source": "https://github.com/sounoob/pagseguro-php-sdk"
     },
     "require-dev": {
-        "phpunit/phpunit": "^4.8.0"
+        "phpunit/phpunit" : ">=4.8.36"
     }
 }
