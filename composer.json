@@ -1,5 +1,6 @@
 {
     "name": "sounoob/pagseguro-php-sdk",
+    "description": "Uma biblioteca do PagSeguro que qualquer noob pode usar, editar, contribuir, melhorar e seja lá o que eles quiserem fazer...",  
     "license": "Apache-2.0",
     "authors": [
         {
@@ -31,5 +32,8 @@
     },
     "require-dev": {
         "phpunit/phpunit" : ">=4.8.36"
-    }
+    },
+    "scripts": {
+        "test": "phpunit --verbose --debug"
+    }    
 }
