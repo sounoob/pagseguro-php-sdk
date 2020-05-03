@@ -141,40 +141,71 @@ class CreditCard extends DirectPayment
     }
 
     protected function requiredFields()
-    {
+    {                            
         if (!isset($this->post['creditCardToken'])) {
             //PagSeguro error code 53037
-            throw new \Exception('credit card token is required.');
+            throw new \Exception('credit card token is required.')
         }
-        if (!isset($this->post['creditCardToken'])) {
-            //PagSeguro error code 53037
-            throw new \Exception('aaaaaaaaaaaaaaaaaaaaaaaaaaaaa.');
+                            
+        if (!isset($this->post['billingAddressStreet'])) {
+            //PagSeguro error code 53055
+            throw new \Exception('billing address street is required.')
         }
-        if (!isset($this->post['creditCardToken'])) {
-            //PagSeguro error code 53037
-            throw new \Exception('aaaaaaaaaaaaaaaaaaaaaaaaaaaaa.');
+                            
+        if (!isset($this->post['billingAddressNumber'])) {
+            //PagSeguro error code 53057
+            throw new \Exception('billing address number is required.')
         }
-        if (!isset($this->post['creditCardToken'])) {
-            //PagSeguro error code 53037
-            throw new \Exception('aaaaaaaaaaaaaaaaaaaaaaaaaaaaa.');
+                            
+        if (!isset($this->post['billingAddressDistrict'])) {
+            //PagSeguro error code 53060
+            throw new \Exception('billing address district is required.')
         }
-        if (!isset($this->post['creditCardToken'])) {
-            //PagSeguro error code 53037
-            throw new \Exception('aaaaaaaaaaaaaaaaaaaaaaaaaaaaa.');
+                            
+        if (!isset($this->post['billingAddressPostalCode'])) {
+            //PagSeguro error code 53053
+            throw new \Exception('billing address postal code is required.')
         }
-        if (!isset($this->post['creditCardToken'])) {
-            //PagSeguro error code 53037
-            throw new \Exception('aaaaaaaaaaaaaaaaaaaaaaaaaaaaa.');
+                            
+        if (!isset($this->post['creditCardHolderCPF'])) {
+            //PagSeguro error code 53045
+            throw new \Exception('credit card holder cpf is required.')
         }
-        if (!isset($this->post['creditCardToken'])) {
-            //PagSeguro error code 53037
-            throw new \Exception('aaaaaaaaaaaaaaaaaaaaaaaaaaaaa.');
+                            
+        if (!isset($this->post['billingAddressState'])) {
+            //PagSeguro error code 53064
+            throw new \Exception('billing address state is required.')
         }
-        if (!isset($this->post['creditCardToken'])) {
-            //PagSeguro error code 53037
-            throw new \Exception('aaaaaaaaaaaaaaaaaaaaaaaaaaaaa.');
+                            
+        if (!isset($this->post['billingAddressCity'])) {
+            //PagSeguro error code 53062
+            throw new \Exception('billing address city is required.')
         }
-
+                            
+        if (!isset($this->post['billingAddressCountry'])) {
+            //PagSeguro error code 53066
+            throw new \Exception('billing address country is required.')
+        }
+                            
+        if (!isset($this->post['creditCardHolderName'])) {
+            //PagSeguro error code 53042
+            throw new \Exception('credit card holder name is required.')
+        }
+                            
+        if (!isset($this->post['creditCardHolderBirthDate'])) {
+            //PagSeguro error code 53047
+            throw new \Exception('credit card holder birthdate is required.')
+        }
+                            
+        if (!isset($this->post['creditCardHolderPhone'])) {
+            //PagSeguro error code 53051
+            throw new \Exception('credit card holder phone is required.')
+        }
+                            
+        if (!isset($this->post['creditCardHolderAreaCode'])) {
+            //PagSeguro error code 53049
+            throw new \Exception('credit card holder area code is required.')
+        }
         parent::requiredFields();
     }
 
