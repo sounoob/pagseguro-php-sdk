@@ -1,0 +1,8 @@
+<?php
+include '../../vendor/autoload.php';
+
+\Sounoob\pagseguro\config\Config::setAccountCredentials('email', 'token');
+
+$cancelAccession = new \Sounoob\pagseguro\subscription\CancelAccession('code pre-approval');
+
+$cancelAccession->send();
