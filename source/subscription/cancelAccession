@@ -1,0 +1,42 @@
+<?php
+
+namespace Sounoob\pagseguro\subscription;
+
+use Sounoob\pagseguro\core\PagSeguro;
+
+/**
+ * Class CancelAccession
+ * @package Sounoob\pagseguro\subscription
+ */
+class CancelAccession extends PagSeguro
+{
+    /**
+     * @var string
+     */
+    private $accessionCode = '';
+
+    /**
+     * CancelAccession constructor.
+     * @param $accessionCode
+     * @throws \Exception
+     */
+    public function __construct($accessionCode)
+    {
+        parent::__construct();
+
+        $this->accessionCode = $accessionCode;
+    }
+
+    /**
+     * @return \SimpleXMLElement|\stdClass
+     * @throws \Exception
+     */
+    public function send()
+    {
+        $this->url = 'pre-approvals/' . $this->accessionCode . '/cancel';
+        $this->curl->setCustomRequest('PUT');
+        $this->curl->setContentType('application/json;charset=UTF-8');
+        $this->curl->setAccept('application/vnd.pagseguro.com.br.v3+json;charset=ISO-8859-1');
+        return parent::send();
+    }
+}
